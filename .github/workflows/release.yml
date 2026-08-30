@@ -163,7 +163,9 @@ jobs:
           fi
           cp "${INST}" "dist-release/WPSEnhancer-windows-x86_64-installer.exe"
           if [ -f bin/wps-enhancer-go.exe ]; then
-            (cd bin && zip -r "../dist-release/WPSEnhancer-windows-x86_64.zip" wps-enhancer-go.exe)
+            # windows-latest 无 zip；用 PowerShell Compress-Archive
+            powershell.exe -NoProfile -Command \
+              "Compress-Archive -Path 'bin/wps-enhancer-go.exe' -DestinationPath 'dist-release/WPSEnhancer-windows-x86_64.zip' -Force"
           fi
           ls -la dist-release/
 

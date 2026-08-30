@@ -1,0 +1,56 @@
+name: Test
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+          cache-dependency-path: go.sum
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+      - name: Go test (internal)
+        run: go test ./internal/... -count=1 -coverprofile=coverage.out -timeout 120s
+
+      - name: Go vet
+        run: go vet ./internal/...
+
+      - name: Coverage summary
+        run: go tool cover -func=coverage.out
+
+      - name: Coverage gate
+        run: bash scripts/check_coverage.sh
+
+      - name: Frontend build
+        working-directory: frontend
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build
+
+  e2e:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+          cache-dependency-path: go.sum
+
+      - name: Pipeline E2E
+        run: go test ./internal/e2e/... -count=1 -timeout 300s

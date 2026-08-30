@@ -1,0 +1,16 @@
+.task
+bin
+dist-release
+frontend/dist
+frontend/node_modules
+build/linux/appimage/build
+build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
+# Mobile generated (per-machine; overlays hold absolute paths)
+build/ios/xcode/overlay.json
+build/ios/xcode/gen/
+build/android/overlay.json
+build/android/gen/
+# 企查查真实源表（本地夹具，不提交；见 internal/e2e/testdata/qcc/README.md）
+internal/e2e/testdata/qcc/case_*.xlsx
+internal/e2e/testdata/qcc/case_*.xls
+coverage.out

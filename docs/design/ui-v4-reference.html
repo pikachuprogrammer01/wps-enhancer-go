@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WPS Enhancer UI Preview · Excel / Word</title>
+<style>
+:root{
+  --brand:#E5484D;
+  --brand-hover:#D63B42;
+  --brand-soft:#FFF1F2;
+  --word:#2563EB;
+  --word-soft:#EFF6FF;
+  --excel:#16A34A;
+  --excel-soft:#F0FDF4;
+  --bg:#F6F6F7;
+  --surface:#FFFFFF;
+  --surface-subtle:#FAFAFA;
+  --line:#E5E7EB;
+  --line-strong:#D4D4D8;
+  --text:#18181B;
+  --text-secondary:#52525B;
+  --text-tertiary:#71717A;
+  --text-muted:#A1A1AA;
+  --success:#16A34A;
+  --warning:#D97706;
+  --danger:#DC2626;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:#E9EAEC;color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+  "Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:14px;line-height:1.6;
+}
+button{font:inherit;cursor:pointer}
+.window{
+  width:1040px;height:720px;margin:30px auto;
+  background:var(--surface);border:1px solid #D5D6D9;
+  border-radius:13px;overflow:hidden;
+  box-shadow:0 24px 70px rgba(15,23,42,.16);
+}
+.titlebar{
+  height:46px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;padding:0 17px;background:#fff;
+}
+.brand{display:flex;align-items:center;gap:9px}
+.logo{
+  width:25px;height:25px;border-radius:7px;background:var(--brand);
+  color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;
+}
+.brand-name{font-size:13px;font-weight:650}
+.brand-type{font-size:11px;color:var(--text-muted);margin-left:2px}
+.window-tools{margin-left:auto;display:flex;gap:3px}
+.window-tools button{
+  width:30px;height:25px;border:0;background:transparent;
+  color:var(--text-tertiary);border-radius:5px;
+}
+.window-tools .close:hover{background:#FEE2E2;color:var(--danger)}
+
+.main{height:calc(100% - 46px);overflow:auto;background:var(--bg)}
+.canvas{width:900px;margin:auto;padding:34px 0 42px}
+
+.header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:22px;
+}
+.header h1{margin:0;font-size:22px;line-height:1.3;letter-spacing:-.4px}
+.header p{margin:5px 0 0;color:var(--text-tertiary);font-size:12px}
+.header-actions{display:flex;gap:7px}
+.small-btn{
+  height:31px;padding:0 11px;background:#fff;
+  border:1px solid var(--line);border-radius:7px;
+  color:var(--text-secondary);font-size:11px;
+}
+
+.switch-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:18px;
+}
+.tabs{display:flex;padding:3px;background:#EDEDEF;border-radius:9px}
+.tab{
+  min-width:88px;height:34px;padding:0 20px;border:0;
+  background:transparent;border-radius:7px;color:var(--text-tertiary);
+  font-size:12px;font-weight:550;
+}
+.tab.active{
+  background:#fff;color:var(--brand);
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.tab.word.active{color:var(--word)}
+.context{font-size:11px;color:var(--text-muted)}
+
+.workspace{
+  display:grid;grid-template-columns:1.42fr .98fr;gap:16px;
+}
+.primary-task{
+  min-height:302px;background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:25px 26px;position:relative;overflow:hidden;
+}
+.primary-task::after{
+  content:"";position:absolute;width:220px;height:220px;border-radius:50%;
+  right:-95px;top:-110px;opacity:.75;
+}
+.primary-task.excel::after{background:var(--excel-soft)}
+.primary-task.word::after{background:var(--word-soft)}
+
+.task-label{
+  display:inline-flex;align-items:center;height:24px;padding:0 8px;
+  border-radius:6px;font-size:10px;font-weight:650;
+}
+.task-label.excel{color:var(--excel);background:var(--excel-soft)}
+.task-label.word{color:var(--word);background:var(--word-soft)}
+.task-label.empty{color:var(--text-muted);background:#F4F4F5}
+
+.task-icon{
+  width:44px;height:44px;border-radius:10px;display:grid;place-items:center;
+  font-size:18px;font-weight:800;margin:24px 0 15px;
+}
+.task-icon.excel{background:var(--excel-soft);color:var(--excel)}
+.task-icon.word{background:var(--word-soft);color:var(--word)}
+.task-icon.empty{background:#F4F4F5;color:var(--text-muted)}
+
+.primary-task h2{font-size:20px;margin:0 0 7px;letter-spacing:-.3px}
+.primary-task p{
+  width:410px;margin:0;color:var(--text-secondary);
+  font-size:12px;line-height:1.75;
+}
+.meta{display:flex;gap:15px;margin-top:20px;color:var(--text-muted);font-size:10px}
+.start{
+  position:absolute;left:26px;bottom:24px;height:36px;padding:0 18px;
+  border:0;border-radius:7px;background:var(--brand);color:#fff;
+  font-size:12px;font-weight:600;
+  box-shadow:0 4px 10px rgba(229,72,77,.18);
+}
+.disabled{
+  background:#F4F4F5;color:var(--text-muted);
+  box-shadow:none;cursor:default;
+}
+
+.tools{
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px;
+}
+.tools-title{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:8px
+}
+.tools-title strong{font-size:13px}
+.tools-title span{font-size:10px;color:var(--text-muted)}
+.tool{
+  display:flex;align-items:center;gap:11px;padding:13px 5px;
+  border-bottom:1px solid #F0F0F2;
+}
+.tool:last-child{border-bottom:0}
+.tool-icon{
+  width:32px;height:32px;border-radius:8px;background:#F7F7F8;
+  color:var(--text-secondary);display:grid;place-items:center;
+  font-size:13px;font-weight:700;
+}
+.tool-text{flex:1;min-width:0}
+.tool-name{font-size:12px;font-weight:600}
+.tool-desc{font-size:10px;color:var(--text-muted);white-space:nowrap}
+.arrow{color:#B0B0B7;font-size:14px}
+
+.empty-tools{
+  min-height:235px;display:grid;place-items:center;text-align:center;
+  color:var(--text-muted);font-size:11px;
+}
+.empty-tools .empty-icon{
+  width:38px;height:38px;border-radius:10px;background:#F4F4F5;
+  display:grid;place-items:center;margin:0 auto 8px;color:#A1A1AA;
+}
+
+.bottom{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;
+}
+.box{
+  background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px 17px;
+}
+.box-head{display:flex;justify-content:space-between;margin-bottom:11px}
+.box-head strong{font-size:12px}.box-head span{font-size:10px;color:var(--text-muted)}
+.recent-row{display:flex;align-items:center;gap:9px}
+.recent-icon{
+  width:29px;height:29px;border-radius:7px;background:var(--excel-soft);
+  color:var(--excel);display:grid;place-items:center;font-weight:800;font-size:11px;
+}
+.recent-name{font-size:11px;font-weight:600}.recent-time{font-size:10px;color:var(--text-muted)}
+.local-line{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-secondary)}
+.dot{width:7px;height:7px;border-radius:50%;background:#22C55E}
+.local p{margin:7px 0 0 15px;font-size:10px;color:var(--text-muted)}
+.note{text-align:center;color:var(--text-muted);font-size:10px;margin-top:18px}
+
+.design-panel{
+  margin-top:32px;border-top:1px dashed #D4D4D8;padding-top:25px;
+}
+.design-panel h2{font-size:16px;margin:0 0 4px}
+.design-panel>p{font-size:11px;color:var(--text-muted);margin:0 0 14px}
+.tokens{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:8px;
+}
+.token{
+  overflow:hidden;border:1px solid var(--line);border-radius:8px;background:#fff;
+}
+.swatch{height:32px}
+.token-info{padding:6px 7px}
+.token-name{font-size:9px;color:var(--text-secondary)}
+.token-code{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--text-muted)}
+
+@media(max-width:950px){
+  .window{width:94vw}.canvas{width:auto;margin:0 24px}
+  .workspace{grid-template-columns:1fr}
+  .tokens{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="window">
+<header class="titlebar">
+  <div class="brand">
+    <div class="logo">W</div>
+    <span class="brand-name">WPS Enhancer</span>
+    <span class="brand-type">Office 增强工具</span>
+  </div>
+  <div class="window-tools"><button>—</button><button>□</button><button class="close">×</button></div>
+</header>
+
+<main class="main">
+<div class="canvas">
+  <section class="header">
+    <div>
+      <h1>选择你要增强的 Office 工具</h1>
+      <p>围绕 WPS Word 与 Excel，提供更直接的本地操作。</p>
+    </div>
+    <div class="header-actions"><button class="small-btn">帮助</button><button class="small-btn">⚙ 设置</button></div>
+  </section>
+
+  <!-- 默认进入 Excel：因为当前只有 Excel 功能已经实现 -->
+  <section class="switch-row">
+    <div class="tabs">
+      <button class="tab active" onclick="showOffice('excel')">Excel</button>
+      <button class="tab word" onclick="showOffice('word')">Word</button>
+    </div>
+    <span id="context" class="context">Excel · 1 个已实现功能</span>
+  </section>
+
+  <section id="excelView">
+    <div class="workspace">
+      <article class="primary-task excel">
+        <span class="task-label excel">EXCEL · 已实现</span>
+        <div class="task-icon excel">X</div>
+        <h2>批量导入通讯录</h2>
+        <p>选择源表格与模板，完成列映射，预览处理结果，并导出为需要的通讯录格式。</p>
+        <div class="meta"><span>XLSX / XLS / CSV</span><span>VCF / TXT / CSV / XLSX</span><span>本地处理</span></div>
+        <button class="start">开始使用 →</button>
+      </article>
+      <aside class="tools">
+        <div class="tools-title"><strong>Excel 工具</strong><span>当前可用</span></div>
+        <div class="tool"><div class="tool-icon">↔</div><div class="tool-text"><div class="tool-name">批量导入通讯录</div><div class="tool-desc">文件 → 模板 → 列映射 → 预览 → 导出</div></div><div class="arrow">›</div></div>
+        <div class="tool"><div class="tool-icon">▦</div><div class="tool-text"><div class="tool-name">模板系统</div><div class="tool-desc">当前功能内部使用的模板能力</div></div><div class="arrow">›</div></div>
+        <div class="tool"><div class="tool-icon">↓</div><div class="tool-text"><div class="tool-name">多格式导出</div><div class="tool-desc">XLSX / XLS / CSV / VCF / TXT</div></div><div class="arrow">›</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="wordView" style="display:none">
+    <div class="workspace">
+      <article class="primary-task word">
+        <span class="task-label empty">WORD · 功能待加入</span>
+        <div class="task-icon empty">W</div>
+        <h2>Word 增强</h2>
+        <p>当前项目资料只明确了 Word 作为目标产品范围，尚未提供已经实现的 Word 增强功能，因此这里不虚构具体功能。</p>
+        <div class="meta"><span>功能规划中</span><span>保持现有设计体系</span></div>
+        <button class="start disabled">暂未提供功能</button>
+      </article>
+      <aside class="tools">
+        <div class="tools-title"><strong>Word 工具</strong><span>暂无已实现功能</span></div>
+        <div class="empty-tools">
+          <div><div class="empty-icon">W</div>当前没有可展示的 Word 功能<br>新增功能后会沿用同一套 UI 规范</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="bottom">
+    <div class="box">
+      <div class="box-head"><strong>最近使用</strong><span>辅助信息</span></div>
+      <div class="recent-row"><div class="recent-icon">X</div><div><div class="recent-name">Excel 批量导入通讯录</div><div class="recent-time">当前功能</div></div></div>
+    </div>
+    <div class="box">
+      <div class="box-head"><strong>运行方式</strong><span>产品特性</span></div>
+      <div class="local-line"><span class="dot"></span>所有文件均在本机处理</div>
+      <p class="local p">不会将 Word / Excel 文件上传到网络。</p>
+    </div>
+  </section>
+
+  <div class="note">WPS Enhancer · 为 WPS Office 提供本地增强能力</div>
+
+  <section class="design-panel">
+    <h2>UI Design Tokens</h2>
+    <p>以下颜色和字号是后续页面必须复用的基础规范，不应在单个页面自行重新定义。</p>
+    <div class="tokens">
+      <div class="token"><div class="swatch" style="background:#E5484D"></div><div class="token-info"><div class="token-name">Brand</div><div class="token-code">#E5484D</div></div></div>
+      <div class="token"><div class="swatch" style="background:#2563EB"></div><div class="token-info"><div class="token-name">Word</div><div class="token-code">#2563EB</div></div></div>
+      <div class="token"><div class="swatch" style="background:#16A34A"></div><div class="token-info"><div class="token-name">Excel</div><div class="token-code">#16A34A</div></div></div>
+      <div class="token"><div class="swatch" style="background:#18181B"></div><div class="token-info"><div class="token-name">Text</div><div class="token-code">#18181B</div></div></div>
+      <div class="token"><div class="swatch" style="background:#F6F6F7"></div><div class="token-info"><div class="token-name">Background</div><div class="token-code">#F6F6F7</div></div></div>
+      <div class="token"><div class="swatch" style="background:#E5E7EB"></div><div class="token-info"><div class="token-name">Border</div><div class="token-code">#E5E7EB</div></div></div>
+    </div>
+  </section>
+</div>
+</main>
+</div>
+
+<script>
+function showOffice(type){
+  const excel=document.getElementById('excelView');
+  const word=document.getElementById('wordView');
+  const tabs=document.querySelectorAll('.tab');
+  const context=document.getElementById('context');
+  tabs.forEach(t=>t.classList.remove('active'));
+  if(type==='excel'){
+    excel.style.display='block';word.style.display='none';
+    tabs[0].classList.add('active');
+    context.textContent='Excel · 1 个已实现功能';
+  }else{
+    excel.style.display='none';word.style.display='block';
+    tabs[1].classList.add('active');
+    context.textContent='Word · 当前暂无已实现功能';
+  }
+}
+</script>
+</body>
+</html>

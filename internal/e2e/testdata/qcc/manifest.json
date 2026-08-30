@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "case_01",
+      "file": "case_01.xlsx",
+      "description": "标准企查查导出：含声明行，剔除后 10 列企业信息表",
+      "sheet": "",
+      "skip_declaration": true,
+      "expect": {
+        "ready": false,
+        "declaration_skipped": true,
+        "headers": [],
+        "row_count": 0,
+        "source_row_count": 0,
+        "suggest_min": 1,
+        "preview_rows": 0,
+        "invalid_phones": 0,
+        "export_formats": ["xlsx", "csv", "vcf", "txt"]
+      }
+    },
+    {
+      "id": "case_02",
+      "file": "case_02.xlsx",
+      "description": "已处理表格：无声明行，8 列（列序与 case_01 不同）",
+      "sheet": "",
+      "skip_declaration": true,
+      "expect": {
+        "ready": false,
+        "declaration_skipped": false,
+        "headers": [],
+        "row_count": 0,
+        "source_row_count": 0,
+        "suggest_min": 1,
+        "preview_rows": 0,
+        "invalid_phones": 0,
+        "export_formats": ["xlsx", "csv", "vcf", "txt"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "builtin_columns": [
+    {
+      "key": "name",
+      "label": "姓名",
+      "aliases": [
+        "姓名",
+        "姓",
+        "名称",
+        "联系人",
+        "名字"
+      ]
+    },
+    {
+      "key": "phone",
+      "label": "手机",
+      "aliases": [
+        "手机",
+        "手机号",
+        "电话",
+        "联系电话",
+        "有效手机号",
+        "家庭手机",
+        "手机号码",
+        "联系方式"
+      ]
+    },
+    {
+      "key": "company",
+      "label": "公司名",
+      "aliases": [
+        "公司",
+        "公司名",
+        "公司名称",
+        "单位",
+        "企业名称"
+      ]
+    },
+    {
+      "key": "website",
+      "label": "网址",
+      "aliases": [
+        "网址",
+        "官网",
+        "网站",
+        "官网网址",
+        "主页",
+        "网址链接"
+      ]
+    }
+  ],
+  "app_settings": {
+    "phone_validate": true,
+    "phone_highlight": true,
+    "phone_merge": false,
+    "phone_separators": [
+      ",",
+      "，",
+      ";",
+      "；",
+      "、",
+      " ",
+      "\n",
+      "|"
+    ],
+    "csv_encoding": "utf-8-bom",
+    "txt_encoding": "utf-8-bom",
+    "txt_separator": " ",
+    "vcf_fields": [
+      "name",
+      "phone",
+      "company",
+      "website"
+    ],
+    "vcf_name_prefix": "vcf_",
+    "vcf_name_suffix": "",
+    "vcf_timestamp": true,
+    "vcf_timestamp_position": "prefix",
+    "declaration_detect": true,
+    "declaration_keywords": [
+      "企查查",
+      "天眼查",
+      "爱企查",
+      "启信宝",
+      "水滴信用",
+      "导出数据",
+      "导出声明",
+      "数据来源",
+      "声明"
+    ],
+    "log_debug": false,
+    "log_retain_days": 30,
+    "log_auto_clean": true,
+    "auto_update_enabled": true,
+    "use_system_proxy": true,
+    "update_url": "https://gitee.com/pikachuprogrammer01/wps-enhancer/raw/main/update.json",
+    "download_dir": "/Users/pikachu/Downloads",
+    "install_dir": "/Applications"
+  }
+}

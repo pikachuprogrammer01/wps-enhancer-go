@@ -1,0 +1,2937 @@
+{
+  "cases": [
+    {
+      "name": "split_phones_138;139",
+      "func": "split_phones",
+      "input": {
+        "raw_phone": "138;139",
+        "separators": [
+          ";"
+        ]
+      },
+      "output": [
+        "138",
+        "139"
+      ]
+    },
+    {
+      "name": "split_phones_ 138 ; 139 ",
+      "func": "split_phones",
+      "input": {
+        "raw_phone": " 138 ; 139 ",
+        "separators": [
+          ";"
+        ]
+      },
+      "output": [
+        "138",
+        "139"
+      ]
+    },
+    {
+      "name": "split_phones_138;;139",
+      "func": "split_phones",
+      "input": {
+        "raw_phone": "138;;139",
+        "separators": [
+          ";"
+        ]
+      },
+      "output": [
+        "138",
+        "139"
+      ]
+    },
+    {
+      "name": "split_phones_",
+      "func": "split_phones",
+      "input": {
+        "raw_phone": "",
+        "separators": [
+          ";"
+        ]
+      },
+      "output": []
+    },
+    {
+      "name": "split_phones_138,139；140、141 | 142",
+      "func": "split_phones",
+      "input": {
+        "raw_phone": "138,139；140、141 | 142",
+        "separators": [
+          ",",
+          "，",
+          ";",
+          "；",
+          "、",
+          " ",
+          "\n",
+          "|"
+        ]
+      },
+      "output": [
+        "138",
+        "139",
+        "140",
+        "141",
+        "142"
+      ]
+    },
+    {
+      "name": "split_phones_138 139",
+      "func": "split_phones",
+      "input": {
+        "raw_phone": "138 139",
+        "separators": [
+          " "
+        ]
+      },
+      "output": [
+        "138",
+        "139"
+      ]
+    },
+    {
+      "name": "validate_phone_13800000000",
+      "func": "validate_phone",
+      "input": {
+        "phone": "13800000000"
+      },
+      "output": true
+    },
+    {
+      "name": "validate_phone_+8613800000000",
+      "func": "validate_phone",
+      "input": {
+        "phone": "+8613800000000"
+      },
+      "output": true
+    },
+    {
+      "name": "validate_phone_",
+      "func": "validate_phone",
+      "input": {
+        "phone": ""
+      },
+      "output": true
+    },
+    {
+      "name": "validate_phone_12345",
+      "func": "validate_phone",
+      "input": {
+        "phone": "12345"
+      },
+      "output": false
+    },
+    {
+      "name": "validate_phone_23800000000",
+      "func": "validate_phone",
+      "input": {
+        "phone": "23800000000"
+      },
+      "output": false
+    },
+    {
+      "name": "validate_phone_1380000000a",
+      "func": "validate_phone",
+      "input": {
+        "phone": "1380000000a"
+      },
+      "output": false
+    },
+    {
+      "name": "match_default",
+      "func": "match_columns",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": [
+        {
+          "source_col": "姓名",
+          "status": "exact",
+          "template_col": {
+            "enabled": true,
+            "key": "name",
+            "name": "姓名"
+          }
+        },
+        {
+          "source_col": "手机号",
+          "status": "alias",
+          "template_col": {
+            "enabled": true,
+            "key": "phone",
+            "name": "手机"
+          }
+        },
+        {
+          "source_col": "公司",
+          "status": "alias",
+          "template_col": {
+            "enabled": true,
+            "key": "company",
+            "name": "公司名"
+          }
+        }
+      ]
+    },
+    {
+      "name": "match_manual",
+      "func": "match_columns",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "a",
+          "b",
+          "c"
+        ],
+        "manual_map": {
+          "name": "a",
+          "phone": ""
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": [
+        {
+          "source_col": "a",
+          "status": "manual",
+          "template_col": {
+            "enabled": true,
+            "key": "name",
+            "name": "姓名"
+          }
+        },
+        {
+          "source_col": null,
+          "status": "manual",
+          "template_col": {
+            "enabled": true,
+            "key": "phone",
+            "name": "手机"
+          }
+        },
+        {
+          "source_col": null,
+          "status": "none",
+          "template_col": {
+            "enabled": true,
+            "key": "company",
+            "name": "公司名"
+          }
+        }
+      ]
+    },
+    {
+      "name": "match_unmatched",
+      "func": "match_columns",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号"
+        ],
+        "manual_map": {},
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "website",
+              "name": "网址"
+            }
+          ],
+          "mappings": {},
+          "name": "多列"
+        }
+      },
+      "output": [
+        {
+          "source_col": "姓名",
+          "status": "exact",
+          "template_col": {
+            "enabled": true,
+            "key": "name",
+            "name": "姓名"
+          }
+        },
+        {
+          "source_col": "手机号",
+          "status": "alias",
+          "template_col": {
+            "enabled": true,
+            "key": "phone",
+            "name": "手机"
+          }
+        },
+        {
+          "source_col": null,
+          "status": "none",
+          "template_col": {
+            "enabled": true,
+            "key": "website",
+            "name": "网址"
+          }
+        }
+      ]
+    },
+    {
+      "name": "preview_default",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone",
+            "company",
+            "website"
+          ],
+          "vcf_name_prefix": "vcf_",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 1,
+        "invalid_summary": [
+          "第 2 行：bad 不是合法手机号"
+        ],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13900000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": false,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "preview_merge",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": true,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone",
+            "company",
+            "website"
+          ],
+          "vcf_name_prefix": "vcf_",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 1,
+        "invalid_summary": [
+          "第 2 行：bad 不是合法手机号"
+        ],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "",
+              "13900000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": false,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "write_request_merge",
+      "func": "build_write_request",
+      "input": {
+        "output_path": "/tmp/out.xlsx",
+        "preview_ref": "preview_merge"
+      },
+      "output": {
+        "cell_styles": {
+          "(2, 1)": {
+            "background_color": "#FF0000"
+          }
+        },
+        "data_rows": [
+          [
+            "张三",
+            "13800000000",
+            "A公司"
+          ],
+          [
+            "",
+            "13900000000",
+            "A公司"
+          ],
+          [
+            "李四",
+            "bad",
+            "B公司"
+          ],
+          [
+            "王五",
+            "",
+            ""
+          ]
+        ],
+        "encoding": "utf-8",
+        "field_keys": [
+          "name",
+          "phone",
+          "company"
+        ],
+        "file_path": "/tmp/out.xlsx",
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "merge_ranges": [
+          {
+            "col_index": 0,
+            "row_end": 1,
+            "row_start": 0
+          }
+        ],
+        "separator": " ",
+        "vcf_fields": [
+          "name",
+          "phone",
+          "company",
+          "website"
+        ],
+        "vcf_name_prefix": "vcf_",
+        "vcf_name_suffix": ""
+      }
+    },
+    {
+      "name": "preview_validate_off",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": false,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone",
+            "company",
+            "website"
+          ],
+          "vcf_name_prefix": "vcf_",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 0,
+        "invalid_summary": [],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13900000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "preview_no_phone",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone",
+            "company",
+            "website"
+          ],
+          "vcf_name_prefix": "vcf_",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "无手机"
+        }
+      },
+      "output": {
+        "invalid_count": 0,
+        "invalid_summary": [],
+        "rows": [
+          {
+            "is_first_of_split": false,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "preview_unmatched_col",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone",
+            "company",
+            "website"
+          ],
+          "vcf_name_prefix": "vcf_",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "website",
+              "name": "网址"
+            }
+          ],
+          "mappings": {},
+          "name": "多列"
+        }
+      },
+      "output": {
+        "invalid_count": 1,
+        "invalid_summary": [
+          "第 2 行：bad 不是合法手机号"
+        ],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              ""
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13900000000",
+              ""
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": false,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              ""
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "preview_merge_group",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "姓名": "张三",
+            "手机": "13800000000"
+          },
+          {
+            "姓名": "李四",
+            "手机": "13900000000"
+          },
+          {
+            "姓名": "张三",
+            "手机": "13700000000"
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": true,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": false,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone",
+            "company",
+            "website"
+          ],
+          "vcf_name_prefix": "vcf_",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            }
+          ],
+          "mappings": {},
+          "name": "同名"
+        }
+      },
+      "output": {
+        "invalid_count": 0,
+        "invalid_summary": [],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "",
+              "13700000000"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "13900000000"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "write_request_merge_group",
+      "func": "build_write_request",
+      "input": {
+        "output_path": "/tmp/out.xlsx",
+        "preview_ref": "preview_merge_group"
+      },
+      "output": {
+        "cell_styles": {},
+        "data_rows": [
+          [
+            "张三",
+            "13800000000"
+          ],
+          [
+            "",
+            "13700000000"
+          ],
+          [
+            "李四",
+            "13900000000"
+          ]
+        ],
+        "encoding": "utf-8",
+        "field_keys": [
+          "name",
+          "phone"
+        ],
+        "file_path": "/tmp/out.xlsx",
+        "headers": [
+          "姓名",
+          "手机"
+        ],
+        "merge_ranges": [
+          {
+            "col_index": 0,
+            "row_end": 1,
+            "row_start": 0
+          }
+        ],
+        "separator": " ",
+        "vcf_fields": [
+          "name",
+          "phone",
+          "company",
+          "website"
+        ],
+        "vcf_name_prefix": "vcf_",
+        "vcf_name_suffix": ""
+      }
+    },
+    {
+      "name": "preview_no_merge",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "姓名": "张三",
+            "手机": "13800000000,13900000000"
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": false,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone",
+            "company",
+            "website"
+          ],
+          "vcf_name_prefix": "vcf_",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 0,
+        "invalid_summary": [],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              ""
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13900000000",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "write_request_no_merge",
+      "func": "build_write_request",
+      "input": {
+        "output_path": "/tmp/out.xlsx",
+        "preview_ref": "preview_no_merge"
+      },
+      "output": {
+        "cell_styles": {},
+        "data_rows": [
+          [
+            "张三",
+            "13800000000",
+            ""
+          ],
+          [
+            "张三",
+            "13900000000",
+            ""
+          ]
+        ],
+        "encoding": "utf-8",
+        "field_keys": [
+          "name",
+          "phone",
+          "company"
+        ],
+        "file_path": "/tmp/out.xlsx",
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "merge_ranges": [],
+        "separator": " ",
+        "vcf_fields": [
+          "name",
+          "phone",
+          "company",
+          "website"
+        ],
+        "vcf_name_prefix": "vcf_",
+        "vcf_name_suffix": ""
+      }
+    },
+    {
+      "name": "preview_highlight_off",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": false,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone",
+            "company",
+            "website"
+          ],
+          "vcf_name_prefix": "vcf_",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 1,
+        "invalid_summary": [
+          "第 2 行：bad 不是合法手机号"
+        ],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13900000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": false,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "write_request_no_highlight",
+      "func": "build_write_request",
+      "input": {
+        "output_path": "/tmp/out.xlsx",
+        "preview_ref": "preview_highlight_off"
+      },
+      "output": {
+        "cell_styles": {},
+        "data_rows": [
+          [
+            "张三",
+            "13800000000",
+            "A公司"
+          ],
+          [
+            "张三",
+            "13900000000",
+            "A公司"
+          ],
+          [
+            "李四",
+            "bad",
+            "B公司"
+          ],
+          [
+            "王五",
+            "",
+            ""
+          ]
+        ],
+        "encoding": "utf-8",
+        "field_keys": [
+          "name",
+          "phone",
+          "company"
+        ],
+        "file_path": "/tmp/out.xlsx",
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "merge_ranges": [],
+        "separator": " ",
+        "vcf_fields": [
+          "name",
+          "phone",
+          "company",
+          "website"
+        ],
+        "vcf_name_prefix": "vcf_",
+        "vcf_name_suffix": ""
+      }
+    },
+    {
+      "name": "preview_export_params",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "gbk",
+          "phone_highlight": true,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-16",
+          "txt_separator": "、",
+          "vcf_fields": [
+            "name",
+            "phone"
+          ],
+          "vcf_name_prefix": "客户-",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 1,
+        "invalid_summary": [
+          "第 2 行：bad 不是合法手机号"
+        ],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13900000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": false,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "write_request_enc_txt",
+      "func": "build_write_request",
+      "input": {
+        "output_path": "/tmp/out.txt",
+        "preview_ref": "preview_export_params"
+      },
+      "output": {
+        "cell_styles": {
+          "(2, 1)": {
+            "background_color": "#FF0000"
+          }
+        },
+        "data_rows": [
+          [
+            "张三",
+            "13800000000",
+            "A公司"
+          ],
+          [
+            "张三",
+            "13900000000",
+            "A公司"
+          ],
+          [
+            "李四",
+            "bad",
+            "B公司"
+          ],
+          [
+            "王五",
+            "",
+            ""
+          ]
+        ],
+        "encoding": "utf-16",
+        "field_keys": [
+          "name",
+          "phone",
+          "company"
+        ],
+        "file_path": "/tmp/out.txt",
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "merge_ranges": [],
+        "separator": "、",
+        "vcf_fields": [
+          "name",
+          "phone"
+        ],
+        "vcf_name_prefix": "客户-",
+        "vcf_name_suffix": ""
+      }
+    },
+    {
+      "name": "write_request_enc_csv",
+      "func": "build_write_request",
+      "input": {
+        "output_path": "/tmp/out.csv",
+        "preview_ref": "preview_export_params"
+      },
+      "output": {
+        "cell_styles": {
+          "(2, 1)": {
+            "background_color": "#FF0000"
+          }
+        },
+        "data_rows": [
+          [
+            "张三",
+            "13800000000",
+            "A公司"
+          ],
+          [
+            "张三",
+            "13900000000",
+            "A公司"
+          ],
+          [
+            "李四",
+            "bad",
+            "B公司"
+          ],
+          [
+            "王五",
+            "",
+            ""
+          ]
+        ],
+        "encoding": "gbk",
+        "field_keys": [
+          "name",
+          "phone",
+          "company"
+        ],
+        "file_path": "/tmp/out.csv",
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "merge_ranges": [],
+        "separator": "、",
+        "vcf_fields": [
+          "name",
+          "phone"
+        ],
+        "vcf_name_prefix": "客户-",
+        "vcf_name_suffix": ""
+      }
+    },
+    {
+      "name": "write_request_enc_xlsx",
+      "func": "build_write_request",
+      "input": {
+        "output_path": "/tmp/out.xlsx",
+        "preview_ref": "preview_export_params"
+      },
+      "output": {
+        "cell_styles": {
+          "(2, 1)": {
+            "background_color": "#FF0000"
+          }
+        },
+        "data_rows": [
+          [
+            "张三",
+            "13800000000",
+            "A公司"
+          ],
+          [
+            "张三",
+            "13900000000",
+            "A公司"
+          ],
+          [
+            "李四",
+            "bad",
+            "B公司"
+          ],
+          [
+            "王五",
+            "",
+            ""
+          ]
+        ],
+        "encoding": "utf-8",
+        "field_keys": [
+          "name",
+          "phone",
+          "company"
+        ],
+        "file_path": "/tmp/out.xlsx",
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "merge_ranges": [],
+        "separator": "、",
+        "vcf_fields": [
+          "name",
+          "phone"
+        ],
+        "vcf_name_prefix": "客户-",
+        "vcf_name_suffix": ""
+      }
+    },
+    {
+      "name": "preview_vcf",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": true,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone"
+          ],
+          "vcf_name_prefix": "客户-",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 1,
+        "invalid_summary": [
+          "第 2 行：bad 不是合法手机号"
+        ],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "",
+              "13900000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": false,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "write_request_vcf_indexed",
+      "func": "build_write_request",
+      "input": {
+        "output_path": "/tmp/out.vcf",
+        "preview_ref": "preview_vcf"
+      },
+      "output": {
+        "cell_styles": {
+          "(2, 1)": {
+            "background_color": "#FF0000"
+          }
+        },
+        "data_rows": [
+          [
+            "张三_1",
+            "13800000000",
+            "A公司"
+          ],
+          [
+            "张三_2",
+            "13900000000",
+            "A公司"
+          ],
+          [
+            "李四",
+            "bad",
+            "B公司"
+          ],
+          [
+            "王五",
+            "",
+            ""
+          ]
+        ],
+        "encoding": "utf-8",
+        "field_keys": [
+          "name",
+          "phone",
+          "company"
+        ],
+        "file_path": "/tmp/out.vcf",
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "merge_ranges": [
+          {
+            "col_index": 0,
+            "row_end": 1,
+            "row_start": 0
+          }
+        ],
+        "separator": " ",
+        "vcf_fields": [
+          "name",
+          "phone"
+        ],
+        "vcf_name_prefix": "客户-",
+        "vcf_name_suffix": ""
+      }
+    },
+    {
+      "name": "preview_display_src",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": " ",
+          "vcf_fields": [
+            "name",
+            "phone"
+          ],
+          "vcf_name_prefix": "客户-",
+          "vcf_name_suffix": "-尾",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 1,
+        "invalid_summary": [
+          "第 2 行：bad 不是合法手机号"
+        ],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13900000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": false,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "preview_display_csv",
+      "func": "build_preview_display",
+      "input": {
+        "fmt": "csv",
+        "preview_ref": "preview_display_src"
+      },
+      "output": {
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "rows": [
+          [
+            "张三",
+            "13800000000",
+            "A公司"
+          ],
+          [
+            "张三",
+            "13900000000",
+            "A公司"
+          ],
+          [
+            "李四",
+            "bad",
+            "B公司"
+          ],
+          [
+            "王五",
+            "",
+            ""
+          ]
+        ]
+      }
+    },
+    {
+      "name": "preview_display_txt",
+      "func": "build_preview_display",
+      "input": {
+        "fmt": "txt",
+        "preview_ref": "preview_display_src"
+      },
+      "output": {
+        "headers": [
+          "姓名",
+          "手机",
+          "公司名"
+        ],
+        "rows": [
+          [
+            "张三",
+            "13800000000",
+            "A公司"
+          ],
+          [
+            "张三",
+            "13900000000",
+            "A公司"
+          ],
+          [
+            "李四",
+            "bad",
+            "B公司"
+          ],
+          [
+            "王五",
+            "",
+            ""
+          ]
+        ]
+      }
+    },
+    {
+      "name": "preview_display_vcf",
+      "func": "build_preview_display",
+      "input": {
+        "fmt": "vcf",
+        "preview_ref": "preview_display_src"
+      },
+      "output": {
+        "headers": [
+          "姓名",
+          "手机"
+        ],
+        "rows": [
+          [
+            "客户-张三-尾",
+            "13800000000"
+          ],
+          [
+            "客户-张三-尾",
+            "13900000000"
+          ],
+          [
+            "客户-李四-尾",
+            "bad"
+          ],
+          [
+            "客户-王五-尾",
+            ""
+          ]
+        ]
+      }
+    },
+    {
+      "name": "preview_text_src",
+      "func": "build_preview_data",
+      "input": {
+        "builtins": [
+          {
+            "aliases": [
+              "姓名",
+              "姓",
+              "名称"
+            ],
+            "key": "name",
+            "label": "姓名"
+          },
+          {
+            "aliases": [
+              "手机",
+              "手机号",
+              "电话",
+              "有效手机号"
+            ],
+            "key": "phone",
+            "label": "手机"
+          },
+          {
+            "aliases": [
+              "公司",
+              "公司名称"
+            ],
+            "key": "company",
+            "label": "公司名"
+          },
+          {
+            "aliases": [
+              "网址",
+              "官网"
+            ],
+            "key": "website",
+            "label": "网址"
+          }
+        ],
+        "headers": [
+          "姓名",
+          "手机号",
+          "公司"
+        ],
+        "manual_map": {},
+        "rows": [
+          {
+            "公司": "A公司",
+            "姓名": "张三",
+            "手机号": "13800000000;13900000000"
+          },
+          {
+            "公司": "B公司",
+            "姓名": "李四",
+            "手机号": "bad"
+          },
+          {
+            "公司": "",
+            "姓名": "王五",
+            "手机号": ""
+          }
+        ],
+        "settings": {
+          "csv_encoding": "utf-8-bom",
+          "phone_highlight": true,
+          "phone_merge": false,
+          "phone_separators": [
+            ",",
+            "，",
+            ";",
+            "；",
+            "、",
+            " ",
+            "\n",
+            "|"
+          ],
+          "phone_validate": true,
+          "txt_encoding": "utf-8-bom",
+          "txt_separator": "、",
+          "vcf_fields": [
+            "name",
+            "phone"
+          ],
+          "vcf_name_prefix": "客户-",
+          "vcf_name_suffix": "",
+          "vcf_timestamp": false,
+          "vcf_timestamp_position": "prefix"
+        },
+        "template": {
+          "columns": [
+            {
+              "enabled": true,
+              "key": "name",
+              "name": "姓名"
+            },
+            {
+              "enabled": true,
+              "key": "phone",
+              "name": "手机"
+            },
+            {
+              "enabled": true,
+              "key": "company",
+              "name": "公司名"
+            }
+          ],
+          "mappings": {},
+          "name": "通讯录"
+        }
+      },
+      "output": {
+        "invalid_count": 1,
+        "invalid_summary": [
+          "第 2 行：bad 不是合法手机号"
+        ],
+        "rows": [
+          {
+            "is_first_of_split": true,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13800000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": false,
+            "merge_span": 2,
+            "phone_valid": true,
+            "source_row_index": 1,
+            "values": [
+              "张三",
+              "13900000000",
+              "A公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": false,
+            "source_row_index": 2,
+            "values": [
+              "李四",
+              "bad",
+              "B公司"
+            ]
+          },
+          {
+            "is_first_of_split": true,
+            "merge_span": 1,
+            "phone_valid": true,
+            "source_row_index": 3,
+            "values": [
+              "王五",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "text_preview_csv",
+      "func": "build_text_preview",
+      "input": {
+        "fmt": "csv",
+        "preview_ref": "preview_text_src"
+      },
+      "output": "姓名,手机,公司名\n张三,13800000000,A公司\n张三,13900000000,A公司\n李四,bad,B公司\n王五,,\n"
+    },
+    {
+      "name": "text_preview_txt",
+      "func": "build_text_preview",
+      "input": {
+        "fmt": "txt",
+        "preview_ref": "preview_text_src"
+      },
+      "output": "姓名、手机、公司名\n张三、13800000000、A公司\n张三、13900000000、A公司\n李四、bad、B公司\n王五、、\n"
+    },
+    {
+      "name": "text_preview_vcf",
+      "func": "build_text_preview",
+      "input": {
+        "fmt": "vcf",
+        "preview_ref": "preview_text_src"
+      },
+      "output": "BEGIN:VCARD\nVERSION:3.0\nFN:客户-张三_1\nTEL;TYPE=CELL:13800000000\nEND:VCARD\n\nBEGIN:VCARD\nVERSION:3.0\nFN:客户-张三_2\nTEL;TYPE=CELL:13900000000\nEND:VCARD\n\nBEGIN:VCARD\nVERSION:3.0\nFN:客户-李四\nTEL;TYPE=CELL:bad\nEND:VCARD\n\nBEGIN:VCARD\nVERSION:3.0\nFN:客户-王五\nEND:VCARD\n"
+    }
+  ]
+}

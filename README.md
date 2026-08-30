@@ -2,7 +2,8 @@
 
 WPS 表格增强工具的 Go + Wails v3 重构版。当前功能：**Excel 批量导入通讯录**——把杂乱的客户表格一键整理成手机可导入的通讯录格式。
 
-> 本仓库为 **WPS Enhancer Go 版独立主仓**（已从 monorepo `wps-enhancer` 迁出）。文档在 `docs/`：`migration/`、`design/`、`template_system.md`、`update_sop.md`、`wps-activation-policy.md`、**`agent-license-version.md`**、**`follow-up.md`**。  
+> 本仓库为 **WPS Enhancer 现行主仓（Go + Wails）**。Python / PyQt6 版已停止维护，见归档仓 https://github.com/pikachuprogrammer01/wps-enhancer 。  
+> 文档在 `docs/`：`migration/`、`design/`、`template_system.md`、`update_sop.md`、`wps-activation-policy.md`、**`agent-license-version.md`**、**`follow-up.md`**。  
 > 远程：https://github.com/pikachuprogrammer01/wps-enhancer-go
 
 ## 功能特性

@@ -133,15 +133,22 @@ jobs:
       - name: Install Task + Wails3 + NSIS
         shell: bash
         run: |
+          set -euo pipefail
           go install github.com/go-task/task/v3/cmd/task@latest
           go install github.com/wailsapp/wails/v3/cmd/wails3@latest
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
           choco install nsis -y --no-progress
-          echo "/c/Program Files (x86)/NSIS" >> "$GITHUB_PATH"
+          # windows-latest 不会自动刷新 choco 写入的 PATH；须用 Windows 路径写 GITHUB_PATH
+          echo 'C:\Program Files (x86)\NSIS' >> "$GITHUB_PATH"
+          echo 'C:\Program Files (x86)\NSIS\Bin' >> "$GITHUB_PATH"
 
       - name: Package (NSIS)
         shell: bash
-        run: task package
+        run: |
+          set -euo pipefail
+          command -v makensis
+          makensis -VERSION
+          task package
 
       - name: Stage Windows assets
         shell: bash

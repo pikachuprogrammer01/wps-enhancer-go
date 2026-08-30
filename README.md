@@ -3,7 +3,7 @@
 WPS 表格增强工具的 Go + Wails v3 重构版。当前功能：**Excel 批量导入通讯录**——把杂乱的客户表格一键整理成手机可导入的通讯录格式。
 
 > 本仓库为 **WPS Enhancer 现行主仓（Go + Wails）**。Python / PyQt6 版已停止维护，见归档仓 https://github.com/pikachuprogrammer01/wps-enhancer 。  
-> 文档在 `docs/`：`migration/`、`design/`、`template_system.md`、`update_sop.md`、`wps-activation-policy.md`、**`agent-license-version.md`**、**`follow-up.md`**。  
+> 文档在 `docs/`：`migration/`、`design/`、`template_system.md`、`update_sop.md`、`wps-activation-policy.md`、**`agent-license-version.md`**、**`follow-up.md`**、**`gitee-releases.md`**（统一发布仓对接）。  
 > 远程：https://github.com/pikachuprogrammer01/wps-enhancer-go
 
 ## 功能特性
@@ -31,7 +31,7 @@ WPS 表格增强工具的 Go + Wails v3 重构版。当前功能：**Excel 批�
 
 ## 安装与使用
 
-1. 从 Release 页下载对应平台的压缩包（macOS .app / Windows 可执行文件）
+1. 从 [Gitee 发布仓 Releases](https://gitee.com/pikachuprogrammer01/my-software-releases/releases) 下载对应平台包（macOS `.app` zip / Windows zip 或 NSIS 安装器）
 2. 首次启动后在「激活与授权」中输入激活码完成激活（未激活可试用基础功能）
 3. 首页选择「Excel → 批量导入通讯录」，按三步向导完成导出
 4. 导出的 .vcf 可直接导入手机通讯录；.xlsx 可回贴 WPS 表格
@@ -157,6 +157,7 @@ go test ./internal/e2e/ -run TestQCC -v
 ## 打包与发布
 
 > GitHub 回退更新源即本仓 Releases：[`pikachuprogrammer01/wps-enhancer-go`](https://github.com/pikachuprogrammer01/wps-enhancer-go)。  
+> **用户更新主源**：Gitee [`my-software-releases`](https://gitee.com/pikachuprogrammer01/my-software-releases) 分支 **`wps-enhancer`**（见 `docs/gitee-releases.md`）。  
 > **签名**：第一期可不签名（macOS 右键打开 / Windows SmartScreen「仍要运行」）。
 
 在仓库根目录：
@@ -167,7 +168,7 @@ task package    # macOS → .app；Windows → NSIS（需 makensis）
 ```
 
 - 更新闭环见 `docs/update_sop.md`。
-- **发版**：打 tag `v{版本}` 触发 `.github/workflows/release.yml`（须与 `internal/version.Version`、`build/config.yml` 一致）。
+- **发版**：打 tag `v{版本}` 触发 `.github/workflows/release.yml`（须与 `internal/version.Version`、`build/config.yml` 一致）。用户更新源见 **`docs/gitee-releases.md`**（Gitee `my-software-releases`）。
 - 后续待办见 `docs/follow-up.md`。
 
 ## 授权与激活

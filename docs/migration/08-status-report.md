@@ -61,7 +61,7 @@ Go+Wails 版已完成**代码主体迁移**（核心逻辑 / 文件 IO / 模板 
 
 - ✅：`CheckUpdate`、静默启动检查、`StartDownloadUpdate`、`DownloadProgress`、zip 校验、`download_dir` / `install_dir`。
 - ✅（2026-08-30）：替换指引文案对齐 Python（完全退出 / Gatekeeper / SmartScreen）；「打开所在目录」用 `open -R` / `explorer /select`；新增「打开安装目录」。
-- ⚠️：发版资产上传到 `wps-enhancer-go` Releases + CI 流水线仍为第二期（见 `07-build-release.md`）。
+- ⚠️：用户更新主源为 Gitee 公开仓产品分支（`docs/gitee-releases.md`）；GitHub 私有仓 Release 仅作构建备份。
 
 ### 2. ⚠️ xlsx 表格预览未走 `BuildPreviewDisplay`
 
@@ -73,12 +73,12 @@ Go+Wails 版已完成**代码主体迁移**（核心逻辑 / 文件 IO / 模板 
 
 导出格式：**vcf / xlsx / csv / txt** 四种；源读取仍支持 xls。
 
-### 4. ⚠️ L7 打包发布（workflow 已落，待首次跑绿）
+### 4. ⚠️ L7 打包发布（独立仓 workflow 已落；Gitee 同步待首发验收）
 
 - `build/config.yml` 已定制；本地 mac `task package` 已冒烟；Windows NSIS 走 CI。
-- ✅：根仓库 `.github/workflows/release-go.yml`（tag `go-v*`，与 Python `v*` 错开）。
-- ⚠️：需配置 `WPS_ENHANCER_GO_TOKEN` 并实际打 tag 验收；签名/公证仍为二期。
-- **待办**：见 `docs/follow-up.md`。
+- ✅：独立仓 `.github/workflows/release.yml`（tag `v*`）+ `scripts/publish-gitee.sh`。
+- ⚠️：需配置 `GITEE_TOKEN` 并实际打 tag，验收公开仓分支 `wps-enhancer`；签名/公证仍为二期。
+- **待办**：见 `docs/follow-up.md`、`docs/gitee-releases.md`。
 
 ### 5. 轻微 — 行为对齐细节
 
@@ -86,7 +86,7 @@ Go+Wails 版已完成**代码主体迁移**（核心逻辑 / 文件 IO / 模板 
 |---|------|------|
 | 5.1 | 预览默认行数 | Go 统一 20 行起、×4 展开至 480；Python 默认 30 |
 | 5.2 | 死代码 | `App.Preview` / `App.Export`（默认模板路径）前端未用 |
-| 5.3 | 更新源仓库 | GitHub 回退已指向 `wps-enhancer-go`；自定义 Gitee `update.json` 仍可为旧路径，发 Go 版时需同步 |
+| 5.3 | 更新源仓库 | 默认已指向 `my-software-releases` 分支 `wps-enhancer`（`DefaultUpdateURL`）；GitHub 为回退 |
 
 ### 6. 未在规划内（备查）
 
@@ -106,7 +106,7 @@ Go+Wails 版已完成**代码主体迁移**（核心逻辑 / 文件 IO / 模板 
 | L4 | updater + app | ⚠️ | 下载有，安装引导待对齐 |
 | L5 | 前端 UI | ⚠️ | 主流程可跑；xlsx 预览列待 WYSIWYG |
 | L6 | 订阅体系 | ✅（代码） | 联调未验证 |
-| L7 | 打包发布双端 CI | ⚠️ | `release-go.yml` 已落；待首次 tag + secret |
+| L7 | 打包发布双端 CI | ⚠️ | `release.yml` + `publish-gitee.sh` 已落；待 `GITEE_TOKEN` 首发验收 |
 
 ---
 
@@ -114,7 +114,7 @@ Go+Wails 版已完成**代码主体迁移**（核心逻辑 / 文件 IO / 模板 
 
 1. **L7 第一期本地打包验收**（`07-build-release.md` §4）— Windows NSIS + mac 无签名 `.app`。
 2. **xlsx 预览走 `BuildPreviewDisplay`**（§二.2）— 预览 WYSIWYG 最后一块。
-3. **L7 第二期：tag → Release CI**（上传到 `wps-enhancer-go` 仓库）— 端到端更新验收。
+3. **L7 第二期：tag → Gitee 公开仓**（`my-software-releases` 分支 `wps-enhancer`，见 `gitee-releases.md`）— 端到端更新验收。
 4. LicenseHub 8 项契约联调；顺手清理 §二.5 死代码。
 
 ---

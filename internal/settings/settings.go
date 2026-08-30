@@ -52,8 +52,9 @@ var DefaultPhoneSeparators = []string{",", "，", ";", "；", "、", " ", "\n", 
 // DefaultVCFFields vcf 导出字段默认值。
 var DefaultVCFFields = []string{"name", "phone", "company", "website"}
 
-// DefaultUpdateURL 自动更新源（与 Python 版 settings.py 默认一致）。
-const DefaultUpdateURL = "https://gitee.com/pikachuprogrammer01/wps-enhancer/raw/main/update.json"
+// DefaultUpdateURL 自动更新源（统一发布仓 my-software-releases；见 docs/gitee-releases.md）。
+// 每产品独立分支：raw/{产品名}/update.json。发客户端前须先有该分支并完成至少一次 publish-gitee.sh。
+const DefaultUpdateURL = "https://gitee.com/pikachuprogrammer01/my-software-releases/raw/wps-enhancer/update.json"
 
 // DefaultLogRetainDays 日志保留天数默认值。
 const DefaultLogRetainDays = 30

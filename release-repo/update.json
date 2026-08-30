@@ -1,0 +1,8 @@
+{
+  "version": "1.1.0",
+  "urls": {
+    "macos-arm64": "https://gitee.com/pikachuprogrammer01/my-software-releases/releases/download/wps-enhancer-v1.1.0/WPSEnhancer-macos-arm64.zip",
+    "windows-x86_64": "https://gitee.com/pikachuprogrammer01/my-software-releases/releases/download/wps-enhancer-v1.1.0/WPSEnhancer-windows-x86_64.zip"
+  },
+  "notes": "占位；放到分支 wps-enhancer 根目录；正式发版由 scripts/publish-gitee.sh 覆盖"
+}

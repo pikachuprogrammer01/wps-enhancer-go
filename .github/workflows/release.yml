@@ -179,6 +179,8 @@ jobs:
     needs: [verify-version, build-macos, build-windows]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - uses: actions/download-artifact@v4
         with:
           path: artifacts
@@ -195,3 +197,19 @@ jobs:
           generate_release_notes: true
           files: artifacts/*
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 用户更新主源：公开仓 my-software-releases（需配置 secret GITEE_TOKEN）
+      - name: Publish to Gitee my-software-releases
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GITEE_TOKEN:-}" ]; then
+            echo "跳过：未配置 secret GITEE_TOKEN（见 docs/gitee-releases.md）"
+            exit 0
+          fi
+          chmod +x scripts/publish-gitee.sh
+          bash scripts/publish-gitee.sh \
+            --version "${{ needs.verify-version.outputs.version }}" \
+            --assets-dir artifacts \
+            --notes "WPS Enhancer v${{ needs.verify-version.outputs.version }}"

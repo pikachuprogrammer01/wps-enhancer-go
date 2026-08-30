@@ -1,7 +1,7 @@
 # 更新 SOP 设计：下载 · 安装 · 卸载
 
 > 目标：三阶段流程完善、地址可配置、卸载功能可维护可扩展。
-> 状态：设计已落地（Python 完成 P1–P3）；**Go 版（2026-08-30）**已对齐下载校验、指引文案、打开下载/安装目录、卸载；发版 CI 见 `migration/07-build-release.md`。
+> 状态：设计已落地（Python 完成 P1–P3）；**Go 版（2026-08-31）**已对齐下载校验、指引文案、打开下载/安装目录、卸载；发版与用户更新主源见 **`docs/gitee-releases.md`**（Gitee `my-software-releases` 产品分支）。
 
 ---
 
@@ -103,7 +103,7 @@ class UninstallItem:
 |--------|--------------------------|------|
 | `download_dir` | `~/Downloads` / `%USERPROFILE%\Downloads` | 更新包保存位置 |
 | `install_dir` | `/Applications` / `%LOCALAPPDATA%\WPSEnhancer`（设置可改） | 安装/替换指引中的目标目录 + 「打开安装目录」按钮 |
-| `update_url` | Gitee raw（已有） | 检查/下载源 |
+| `update_url` | Gitee raw：`…/my-software-releases/raw/wps-enhancer/update.json`（见 `gitee-releases.md`） | 检查/下载源 |
 
 > 地址全部配置驱动：改地址 = 改设置，不改代码；升级兼容（旧 settings.json 缺字段走默认值，已有模式）。
 

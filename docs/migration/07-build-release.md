@@ -46,13 +46,15 @@ task package                  # macOS → .app；Windows → NSIS installer（�
 
 ## 3. 发版与更新源
 
-1. 改 `internal/version.Version` 与 `build/config.yml` `info.version` → 提交  
-2. 打 tag **`go-v{版本}`**（勿用裸 `v*`，以免触发 Python `release.yml`）并 push，或 Actions 手动跑 **Release (Go)**  
-3. CI 产出：`WPSEnhancer-macos-{arm64|x86_64}.zip`、`WPSEnhancer-windows-x86_64-installer.exe`（+ 可选 exe zip）  
-4. 配置 secret **`WPS_ENHANCER_GO_TOKEN`** → 资产发到 `pikachuprogrammer01/wps-enhancer-go`；未配置则发本仓库 **prerelease**  
-5. 客户端：检查更新 → 下载 → zip 校验 → 打开所在/安装目录 → 按指引替换  
+> **现行权威**：独立仓 `wps-enhancer-go` + **`docs/gitee-releases.md`**。下文「go-v* / monorepo」为迁出前快照，勿再按此操作。
 
-根仓库 Python：`.github/workflows/release.yml`（`v*`）。Go：`.github/workflows/release-go.yml`（`go-v*`）。
+1. 改 `internal/version.Version` 与 `build/config.yml` `info.version` → 提交  
+2. 打 tag **`v{版本}`** 并 push（或 Actions 手动跑 **Release**）  
+3. CI 产出：`WPSEnhancer-macos-*.zip`、`WPSEnhancer-windows-x86_64.zip`、NSIS installer  
+4. GitHub Release（私有仓备份）+ 若配置 `GITEE_TOKEN` → 同步公开仓 **`my-software-releases` 分支 `wps-enhancer`**  
+5. 客户端默认读：`…/raw/wps-enhancer/update.json`（`urls` 多平台）
+
+详见 `docs/gitee-releases.md`、`scripts/publish-gitee.sh`。
 
 ---
 
@@ -68,7 +70,7 @@ task package                  # macOS → .app；Windows → NSIS installer（�
 
 **第二期**
 
-- [ ] 配置 `WPS_ENHANCER_GO_TOKEN` + 首次 tag 发版跑绿
+- [ ] 配置 `GITEE_TOKEN` + 首次同步 `my-software-releases` 跑绿（见 `docs/gitee-releases.md`）
 - [ ] 签名/公证（可选）；端到端：旧版 → 检查 → 下载 → 替换 → 新版本号
 
 ---

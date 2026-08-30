@@ -23,7 +23,7 @@ concurrency:
 
 env:
   GO_VERSION: '1.25'
-  NODE_VERSION: '20'
+  NODE_VERSION: '24'
 
 jobs:
   verify-version:
@@ -70,6 +70,8 @@ jobs:
           cache-dependency-path: go.sum
 
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - uses: actions/setup-node@v4
         with:
@@ -118,6 +120,8 @@ jobs:
           cache-dependency-path: go.sum
 
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - uses: actions/setup-node@v4
         with:

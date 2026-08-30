@@ -3,7 +3,7 @@
 WPS 表格增强工具的 Go + Wails v3 重构版。当前功能：**Excel 批量导入通讯录**——把杂乱的客户表格一键整理成手机可导入的通讯录格式。
 
 > 本仓库为 **WPS Enhancer 现行主仓（Go + Wails）**。Python / PyQt6 版已停止维护，见归档仓 https://github.com/pikachuprogrammer01/wps-enhancer 。  
-> 文档在 `docs/`：`migration/`、`design/`、`template_system.md`、`update_sop.md`、`wps-activation-policy.md`、**`agent-license-version.md`**、**`follow-up.md`**、**`gitee-releases.md`**（统一发布仓对接）。  
+> 文档在 `docs/`：`migration/`、`design/`、`template_system.md`、`update_sop.md`、`wps-activation-policy.md`、**`agent-license-version.md`**、**`follow-up.md`**、**`release.md`（日常发版）**、**`gitee-releases.md`（发布仓对接）**。  
 > 远程：https://github.com/pikachuprogrammer01/wps-enhancer-go
 
 ## 功能特性
@@ -168,7 +168,7 @@ task package    # macOS → .app；Windows → NSIS（需 makensis）
 ```
 
 - 更新闭环见 `docs/update_sop.md`。
-- **发版**：打 tag `v{版本}` 触发 `.github/workflows/release.yml`（须与 `internal/version.Version`、`build/config.yml` 一致）。用户更新源见 **`docs/gitee-releases.md`**（Gitee `my-software-releases`）。
+- **日常发版**：见 **`docs/release.md`**（`bash scripts/release.sh 1.2.0`）。对接细节见 `docs/gitee-releases.md`。
 - 后续待办见 `docs/follow-up.md`。
 
 ## 授权与激活

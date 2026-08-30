@@ -13,6 +13,7 @@ NOTES=""
 ASSETS_DIR=""
 RELEASE_REPO_DIR="${RELEASE_REPO_DIR:-}"
 DRY_RUN=0
+FORCE=0
 EXTRA_ASSETS=""
 REL_ID=""
 TMP_CLONE=0
@@ -27,6 +28,7 @@ usage() {
     [--notes "更新说明"] \
     [--release-repo-dir /path/to/my-software-releases] \
     [--asset /path/to/extra.file] \
+    [--force] \
     [--dry-run]
 
 环境变量:
@@ -42,6 +44,7 @@ usage() {
   WPSEnhancer-windows-x86_64-installer.exe → 仅上传 Release，不进 urls
 
 分支模型: 每产品独立分支（本产品 → 分支 wps-enhancer，根目录 update.json）。
+--force: 若同名 Release/tag 已存在则先删除再发（用于重试不完整发版）。
 失败回滚: 若已创建 Release 但上传/推送失败，会删除该 Release 及其 git tag，便于重试。
 EOF
 }
@@ -54,6 +57,7 @@ while [[ $# -gt 0 ]]; do
     --release-repo-dir) RELEASE_REPO_DIR="${2:?}"; shift 2 ;;
     --asset) EXTRA_ASSETS="${EXTRA_ASSETS}${EXTRA_ASSETS:+$'\n'}${2:?}"; shift 2 ;;
     --product) PRODUCT="${2:?}"; shift 2 ;;
+    --force) FORCE=1; shift ;;
     --dry-run) DRY_RUN=1; shift ;;
     -h|--help) usage; exit 0 ;;
     *) echo "未知参数: $1" >&2; usage; exit 1 ;;
@@ -259,12 +263,52 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
   exit 0
 fi
 
-# tag 已存在则失败（完整成功过的发布不应被覆盖）
-if EXIST_BODY=$(api_json GET "/repos/${OWNER}/${REPO}/releases/tags/${TAG}" 2>/dev/null); then
-  echo "错误: Release tag 已存在: $TAG" >&2
-  echo "$EXIST_BODY" | head -c 500 >&2 || true
-  echo >&2
-  exit 1
+# Gitee 对不存在的 tag 可能返回 HTTP 200 + body null；须有 id 才算「已存在」
+release_exists() {
+  local body
+  body=$(api_json GET "/repos/${OWNER}/${REPO}/releases/tags/${TAG}" 2>/dev/null || true)
+  echo "$body" | python3 -c 'import json,sys
+raw=sys.stdin.read().strip()
+if not raw or raw=="null":
+  raise SystemExit(1)
+try:
+  d=json.loads(raw)
+except Exception:
+  raise SystemExit(1)
+raise SystemExit(0 if isinstance(d, dict) and d.get("id") else 1)'
+}
+
+delete_existing_release_by_tag() {
+  local body id
+  body=$(api_json GET "/repos/${OWNER}/${REPO}/releases/tags/${TAG}" 2>/dev/null || true)
+  id=$(echo "$body" | python3 -c 'import json,sys
+raw=sys.stdin.read().strip()
+if not raw or raw=="null":
+  print("")
+else:
+  try:
+    d=json.loads(raw)
+    print(d.get("id") or "")
+  except Exception:
+    print("")')
+  if [[ -n "$id" ]]; then
+    echo " --force: 删除已有 Release id=${id} tag=${TAG}"
+    api_json DELETE "/repos/${OWNER}/${REPO}/releases/${id}" >/dev/null || true
+  fi
+  # 顺带删 git tag（可能残留）
+  code=$(curl -sS -o /tmp/gitee-del-tag.json -w "%{http_code}" -X DELETE \
+    -H "Authorization: token ${GITEE_TOKEN}" \
+    "${API}/repos/${OWNER}/${REPO}/tags/${TAG}" || true)
+  echo " --force: 删除 tag ${TAG} → HTTP ${code}"
+}
+
+if release_exists; then
+  if [[ "$FORCE" -eq 1 ]]; then
+    delete_existing_release_by_tag
+  else
+    echo "错误: Release tag 已存在: ${TAG}（重发请加 --force）" >&2
+    exit 1
+  fi
 fi
 
 # —— 先确保产品分支存在（Release 的 target_commitish 必须已存在）——
@@ -328,7 +372,7 @@ if [[ -z "$REL_ID" ]]; then
   echo "错误: 创建 Release 成功但无 id: $CREATE" >&2
   exit 1
 fi
-echo "已创建 Release id=$REL_ID tag=$TAG（target=${PRODUCT_BRANCH}）"
+echo "已创建 Release id=${REL_ID} tag=${TAG}（target=${PRODUCT_BRANCH}）"
 
 while IFS= read -r f; do
   [[ -z "$f" ]] && continue

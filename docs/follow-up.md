@@ -19,9 +19,8 @@
 
 ## 发版
 
+见 **`docs/release.md`**。一句话：
+
 ```bash
-# Version ≡ build/config.yml ≡ tag
-git tag v1.1.0
-git push origin v1.1.0
-# 用户侧更新源：docs/gitee-releases.md（分支 wps-enhancer）
+bash scripts/release.sh 1.2.0
 ```

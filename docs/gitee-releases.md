@@ -106,7 +106,19 @@ https://gitee.com/pikachuprogrammer01/my-software-releases/releases/download/wps
 
 ## 6. 发布流程
 
-### 6.1 构建（本仓 CI）
+### 6.1 一键发版（推荐）
+
+完整操作手册：**[`docs/release.md`](./release.md)**。
+
+```bash
+bash scripts/release.sh 1.2.0
+# 可选：--notes "说明"  --dry-run  --no-push  --force-tag
+```
+
+脚本会：改 `Version` + `info.version` → commit → 打 `v1.2.0` → push（触发 CI）。  
+需已配置 GitHub secret **`GITEE_TOKEN`**，CI 才会同步 Gitee。
+
+### 6.2 构建（本仓 CI，由 tag 触发）
 
 ```bash
 git tag v1.1.0 && git push origin v1.1.0
@@ -114,7 +126,7 @@ git tag v1.1.0 && git push origin v1.1.0
 
 CI 产出 mac/win zip + NSIS，发 GitHub Release；若配置了 `GITEE_TOKEN` 则调用 `publish-gitee.sh`。
 
-### 6.2 手动发布到 Gitee
+### 6.3 手动发布到 Gitee（救急）
 
 ```bash
 GITEE_TOKEN=<私人令牌> bash scripts/publish-gitee.sh \
@@ -132,7 +144,7 @@ GITEE_TOKEN=<私人令牌> bash scripts/publish-gitee.sh \
 
 **失败回滚**：删除未完成的 Release **及同名 git tag**，可直接重试。
 
-### 6.3 首次初始化（仅一次）
+### 6.4 首次初始化（仅一次）
 
 在发布仓：
 
@@ -180,10 +192,12 @@ curl -iL "<urls.windows-x86_64>"
 
 | 想了解 | 看哪里 |
 |--------|--------|
+| 日常发版操作 | [`docs/release.md`](./release.md) |
 | 默认更新 URL | `internal/settings.DefaultUpdateURL` |
 | 解析 update.json | `internal/updater/updater.go` |
 | GitHub 构建 | `.github/workflows/release.yml` |
-| Gitee 发布脚本 | `scripts/publish-gitee.sh` |
+| GitHub 一键发版 | `scripts/release.sh` |
+| Gitee 多资产发布 | `scripts/publish-gitee.sh` |
 | 分支初始化模板 | `release-repo/` |
 
 ---

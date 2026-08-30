@@ -41,7 +41,8 @@ jobs:
           TAG="${{ github.event.inputs.tag_name || github.ref_name }}"
           VER="${TAG#v}"
           CODE=$(sed -n 's/^const Version = "\(.*\)"/\1/p' internal/version/version.go | head -1)
-          CFG=$(grep -E '^[[:space:]]*version:' build/config.yml | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
+          # 取 info.version（顶层 version 是 Wails 配置 schema，不是应用版本）
+          CFG=$(awk '/^info:/{f=1;next} f && /^[^[:space:]#]/{exit} f && /^[[:space:]]+version:/{gsub(/["'\'']/,""); print $2; exit}' build/config.yml)
           echo "tag=${TAG} expected=${VER} code=${CODE} config=${CFG}"
           if [ -z "$CODE" ] || [ -z "$CFG" ]; then
             echo "::error::无法读取 Version / config.yml version"

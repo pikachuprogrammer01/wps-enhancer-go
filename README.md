@@ -3,7 +3,7 @@
 WPS 表格增强工具的 Go + Wails v3 重构版。当前功能：**Excel 批量导入通讯录**——把杂乱的客户表格一键整理成手机可导入的通讯录格式。
 
 > 本仓库为 **WPS Enhancer 现行主仓（Go + Wails）**。Python / PyQt6 版已停止维护，见归档仓 https://github.com/pikachuprogrammer01/wps-enhancer 。  
-> 文档在 `docs/`：`migration/`、`design/`、`template_system.md`、`update_sop.md`、`wps-activation-policy.md`、**`subscription-terms.md`（Pro 订阅）**、**`signpath-setup.md`（Windows 签名）**、**`agent-license-version.md`**、**`follow-up.md`**、**`release.md`（日常发版）**、**`gitee-releases.md`（发布仓对接）**。  
+> 文档在 `docs/`：`migration/`、`design/`、`template_system.md`、`update_sop.md`、`wps-activation-policy.md`、**`subscription-terms.md`（授权与订阅）**、**`agent-license-version.md`**、**`follow-up.md`**、**`release.md`（日常发版）**、**`gitee-releases.md`（发布仓对接）**。  
 > 远程：https://github.com/pikachuprogrammer01/wps-enhancer-go
 
 ## 功能特性
@@ -200,7 +200,7 @@ go run ./cmd/license-probe --fingerprint     # 显示本机设备指纹
 
 ## 许可证
 
-- **源代码**：[MIT License](LICENSE)
-- **Pro 订阅与激活**（独立于 MIT）：[`docs/subscription-terms.md`](docs/subscription-terms.md)、[`docs/wps-activation-policy.md`](docs/wps-activation-policy.md)
+- **软件许可**：[LICENSE](LICENSE)（源码可见；**个人非商业免费**，**公司 / 商业须付费**）
+- **订阅与激活**：[`docs/subscription-terms.md`](docs/subscription-terms.md)、[`docs/wps-activation-policy.md`](docs/wps-activation-policy.md)
 
-仓库已 **MIT 开源**；Windows 签名见 [`SIGNPATH.md`](SIGNPATH.md) / [`docs/signpath-setup.md`](docs/signpath-setup.md)（SignPath Foundation）。
+本仓库可公开浏览，**不是** OSI 开源协议。Windows 代码签名暂缓；下载拦截见 [`docs/release.md`](docs/release.md) 常见问题。

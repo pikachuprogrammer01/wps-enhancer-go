@@ -1,6 +1,6 @@
 # 后续待办
 
-> 更新：2026-08-31（MIT 已公开；SignPath CI 已接入，待控制台 + Secrets）
+> 更新：2026-08-31（许可改为个人免费 / 商业收费；Windows 签名暂缓）
 
 ## 已完成
 
@@ -8,28 +8,30 @@
 - 本地 mac `task package` / Windows 交叉 build
 - 独立仓 + `.github/workflows/test.yml` / `release.yml`（tag `v*`）
 - Gitee 对接：`DefaultUpdateURL`、`scripts/publish-gitee.sh`、`docs/gitee-releases.md`（产品分支 `wps-enhancer`）
-- **MIT License** + Pro 订阅条款 [`docs/subscription-terms.md`](subscription-terms.md)
-- **SignPath**：`SIGNPATH.md`、`.signpath/windows-*.xml`、`release.yml`（签 exe → NSIS → 签 installer）
+- 许可：个人非商业免费、公司/商业须付费（[`LICENSE`](../LICENSE)、[`subscription-terms.md`](subscription-terms.md)）
+- SignPath CI 骨架已预留（**暂不启用**）
 
 ## 下一步
 
 ### 发版 / 更新（L7）
 
 1. ~~在 `my-software-releases` 建分支 `wps-enhancer`~~（已完成）
-2. 配置 GitHub secret `GITEE_TOKEN`，端到端更新验收（见 `docs/gitee-releases.md` §7）
-3. **SignPath**：申请 OSS → 控制台建 project → 配 Secrets → 打 tag 验证签名（见 [`docs/signpath-setup.md`](signpath-setup.md)）
+2. 确认 GitHub secret `GITEE_TOKEN` 稳定；同版本重发已带 `--force`
+3. Windows 网页下载拦截：文档引导 PowerShell / 应用内更新；**签名暂缓**（见下）
 
-### 开源（进行中）
+### 签名（暂缓）
 
-1. ~~GitHub 公开 + MIT~~（已完成）
-2. 确认无密钥泄露（`.env`、LicenseHub 私钥、`GITEE_TOKEN` 等不进仓库）
-3. 完成 SignPath 审核与首次签名发版
-4. Pro 订阅仍走 LicenseHub，条款见 `docs/subscription-terms.md`
+当前许可**不符合** SignPath OSS（需 OSI 开源）。若以后再做签名：
+
+- 自购 OV 代码签名证书，或  
+- 改回 OSI 许可后再申请 SignPath  
+
+相关文件可留作参考：`SIGNPATH.md`、`docs/signpath-setup.md`、`.signpath/`（未配 Secret 时 CI 自动跳过签名）。
 
 ### 产品
 
-1. xlsx `PreviewDisplay` WYSIWYG
-2. LicenseHub 联调
+1. xlsx `PreviewDisplay` WYSIWYG  
+2. LicenseHub 联调  
 
 ## 发版
 

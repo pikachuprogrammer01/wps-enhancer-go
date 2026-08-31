@@ -30,7 +30,7 @@ wps-enhancer 分支
 
 | 产品 | 源码 / 构建仓 | 发版方式 |
 |------|----------------|----------|
-| WPS 增强工具 | GitHub `wps-enhancer-go`（MIT，已公开） | 打 tag `v*` → CI 签名（SignPath）→ `publish-gitee.sh` |
+| WPS 增强工具 | GitHub `wps-enhancer-go`（个人免费 / 商业收费） | 打 tag `v*` → CI → `publish-gitee.sh` |
 | TableFlow | 其产品仓 | 按其 `docs` / `scripts/release.sh` |
 
 **不要**在本仓手写附件或手改 `update.json` 做正式发版（除非救急）。  

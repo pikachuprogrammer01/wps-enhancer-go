@@ -3,7 +3,7 @@
 > **范围**：本文档只描述 WPS 增强工具（Python App）**需要对接的激活码策略**——激活码格式、激活/解绑 API、设备指纹、密钥、错误处理与联调清单。
 > **不包含**：WPS 业务功能、产品细节、安装/打包方案（由 WPS 项目单独考虑）。
 > **上游契约**：LicenseHub 平台文档 `docs/spec/03-activation-api.md`、`docs/spec/04-policy-engine.md`、`docs/sop/02-key-management.md`（如冲突以此三份为准）。
-> **商业条款**：Pro 订阅与用户权益见 [`subscription-terms.md`](./subscription-terms.md)；源码许可见根目录 [`LICENSE`](../LICENSE)（MIT）。
+> **商业条款**：个人免费 / 公司收费见 [`subscription-terms.md`](./subscription-terms.md)；完整许可见根目录 [`LICENSE`](../LICENSE)。
 
 ---
 

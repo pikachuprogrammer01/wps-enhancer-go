@@ -1,21 +1,57 @@
-MIT License
+WPS Enhancer 软件许可协议
+（源码可见 · 个人免费 · 商业收费）
 
-Copyright (c) 2026 pikachu01
+版权所有 © 2026 pikachu01（下称「许可方」）保留所有权利。
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+请仔细阅读本协议。获取、安装、复制或以其他方式使用本软件（含源代码、程序、资源文件及相关文档，下称「本软件」），即表示您已阅读并同意接受本协议全部条款。
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+本仓库可公开浏览源代码，**并非** OSI 意义下的开源软件；未经本协议授权，不得用于商业或组织用途。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+第一条 授权范围
+
+1.1 本软件为专有软件，受《中华人民共和国著作权法》及适用法律保护。
+
+1.2 个人非商业使用（免费）
+    仅限自然人出于个人、学习、研究等非商业目的，在自有设备上安装与使用本软件（含自行编译）。不得代表公司、企业、机关、学校、团队等组织使用，亦不得用于对外有偿服务或内部生产经营。
+
+1.3 商业 / 组织使用（须付费）
+    下列情形须事先取得许可方的付费授权（订阅或商业许可，以官方渠道为准）：
+    (a) 任何公司、企业、合伙、个体工商户、机关、事业单位、学校、非营利组织等主体使用；
+    (b) 雇员、承包方或代理人在履职过程中使用；
+    (c) 将本软件用于商业经营、对外提供服务、或为上述主体提供成果。
+
+1.4 付费授权的范围、期限、设备数量与权益以购买凭证、订阅条款及激活政策为准。
+
+第二条 禁止行为
+
+未经许可方事先书面同意，任何单位或个人不得：
+2.1 再分发、出售、出租、再许可本软件或其实质性部分（官方发布渠道除外）；
+2.2 将本软件用于第 1.3 条所列情形却未取得付费授权；
+2.3 移除或篡改版权声明、许可标识；
+2.4 将本软件用于违法违规用途。
+
+基于公开源码的修改仅限第 1.2 条范围内的个人自用；修改版不得再分发，亦不得用于第 1.3 条情形。
+
+第三条 收费与订阅
+
+3.1 商业 / 组织使用采用订阅或一次性商业授权，价格与权益以许可方官方渠道公布为准。
+3.2 订阅有效期内可获得约定功能、更新与相应支持；期满未续费的，应停止商业 / 组织使用。
+3.3 激活、设备绑定与解绑见《激活与授权政策》及 [`docs/subscription-terms.md`](docs/subscription-terms.md)。
+
+第四条 免责声明
+
+4.1 本软件按「现状」提供。在法律允许的最大范围内，许可方不作任何明示或默示担保。
+4.2 因使用或无法使用本软件所致的任何损失，许可方在法律允许范围内不承担责任。
+4.3 文件处理均在用户本机完成；用户须自行备份数据。
+
+第五条 协议终止
+
+5.1 违反本协议任一条款，授权自动终止，应立即停止使用并删除全部副本。
+5.2 授权终止不影响许可方依法追责的权利。
+
+第六条 其他
+
+6.1 本协议适用中华人民共和国法律。
+6.2 争议协商不成的，提交许可方所在地有管辖权的人民法院裁决。
+6.3 许可方可更新本协议；继续使用即视为接受更新后的条款。
+6.4 联系方式以官方发布渠道为准。

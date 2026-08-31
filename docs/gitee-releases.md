@@ -11,7 +11,7 @@
 
 本应用是桌面端（macOS `.app` + Windows exe/NSIS），内置更新检测：读取静态 `update.json`，比较版本后按**当前平台+架构**下载对应 zip。
 
-**GitHub 本仓已公开**（MIT）：Release 仍作备份；用户更新主源为 Gitee 公开仓。  
+**GitHub 本仓可公开浏览**（专有许可：个人免费 / 商业收费）：Release 作备份；用户更新主源为 Gitee 公开仓。  
 **`my-software-releases` 为公开仓**：只放产物与清单；**每个产品一条独立分支**。
 
 客户端默认更新源（已写入代码）：
@@ -199,9 +199,9 @@ curl -iL "<urls.windows-x86_64>"
 | GitHub 一键发版 | `scripts/release.sh` |
 | Gitee 多资产发布 | `scripts/publish-gitee.sh` |
 | 分支初始化模板 | `release-repo/` |
-| 许可（MIT）与 Pro 订阅 | [`LICENSE`](../LICENSE)、[`docs/subscription-terms.md`](./subscription-terms.md) |
-| 开源 / SignPath 待办 | [`docs/follow-up.md`](./follow-up.md) §开源 |
-| SignPath Windows 签名 | [`SIGNPATH.md`](../SIGNPATH.md)、[`docs/signpath-setup.md`](./signpath-setup.md) |
+| 许可与订阅 | [`LICENSE`](../LICENSE)、[`docs/subscription-terms.md`](./subscription-terms.md) |
+| 后续待办 | [`docs/follow-up.md`](./follow-up.md) |
+| Windows 签名（暂缓） | [`docs/signpath-setup.md`](./signpath-setup.md)（当前许可不适用 SignPath OSS） |
 
 ---
 

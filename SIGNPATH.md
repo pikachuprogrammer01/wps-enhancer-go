@@ -1,38 +1,18 @@
-# SignPath Code Signing
+# SignPath Code Signing（暂缓）
 
-Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
+> **状态：暂不启用。** 本仓库许可为「个人免费 / 商业收费」，**不是** OSI 开源，不符合 [SignPath Foundation OSS](https://signpath.org/) 申请条件。  
+> CI 在未配置 `SIGNPATH_*` Secret 时会自动跳过签名。若将来改回 OSI 许可或自购 OV 证书，可再启用。  
+> 操作备忘见 [`docs/signpath-setup.md`](docs/signpath-setup.md)。
 
 ## Product
 
 - **Name**: WPS Enhancer (Go)
 - **Repository**: https://github.com/pikachuprogrammer01/wps-enhancer-go
-- **License**: [MIT](LICENSE)
+- **License**: [LICENSE](LICENSE)（proprietary; free for personal non-commercial use only）
 - **Distribution**: https://gitee.com/pikachuprogrammer01/my-software-releases/releases (tags `wps-enhancer-v*`)
 
-## Signing policy
+## Pipeline (when secrets are set)
 
-1. Only artifacts built by GitHub Actions workflow [`.github/workflows/release.yml`](.github/workflows/release.yml) on tag **`v*`** are submitted for signing.
-2. Signing order (required so the NSIS payload is also signed):
-   1. Build `wps-enhancer-go.exe`
-   2. Sign the app exe (`windows-app-exe`)
-   3. Build the NSIS installer **from the signed exe**
-   4. Sign the installer (`windows-installer-exe`)
-3. macOS `.app` bundles are ad-hoc signed in CI only (not submitted to SignPath).
-4. Private keys are held by SignPath (HSM-backed). **This project does not store code signing private keys.**
-
-## Artifact configurations
-
-| Slug | File | Description |
-|------|------|-------------|
-| `windows-app-exe` | [`.signpath/windows-app-exe.xml`](.signpath/windows-app-exe.xml) | Portable / update zip contents |
-| `windows-installer-exe` | [`.signpath/windows-installer-exe.xml`](.signpath/windows-installer-exe.xml) | NSIS installer |
-
-Create a SignPath project with slug **`wps-enhancer-go`** (or set repo variable `SIGNPATH_PROJECT_SLUG`) and import **both** configurations above.
-
-## Approvers
-
-Repository maintainers with SignPath **submitter** role on signing policy **`release-signing`**.
-
-## Setup
-
-See [`docs/signpath-setup.md`](docs/signpath-setup.md) for GitHub Secrets and first release verification.
+1. Build `wps-enhancer-go.exe` → sign (`windows-app-exe`) → NSIS from signed exe → sign installer (`windows-installer-exe`).
+2. Artifact configs: [`.signpath/windows-app-exe.xml`](.signpath/windows-app-exe.xml), [`.signpath/windows-installer-exe.xml`](.signpath/windows-installer-exe.xml).
+3. Private keys would be held by SignPath (HSM); this project does not store code signing private keys.

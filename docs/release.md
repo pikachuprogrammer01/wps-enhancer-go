@@ -187,4 +187,4 @@ A: 当前包**未做 Windows 代码签名**，Edge / Defender SmartScreen 对 Gi
    若仍被删，打开 **Windows 安全中心 → 病毒和威胁防护 → 保护历史记录**，看是否「已阻止」；可临时关「实时保护」再下，下完立刻打开并 `Unblock-File`。
 3. **浏览器**：下载栏里被拦项 → `⋯` → **保留**；运行 exe 时 SmartScreen → **更多信息 → 仍要运行**。
 4. **换网络 / 换设备**：手机流量热点、Mac 下载后 U 盘拷贝，有时比公司网 + 360 等杀软组合更顺。
-5. **长期**：配置 GitHub Secrets `SIGNPATH_*` 后 CI 自动 Authenticode 签名（见 [`docs/signpath-setup.md`](./signpath-setup.md)）；或自购 OV 证书。
+5. **长期**：Windows 代码签名暂缓。可选自购 OV 证书；SignPath OSS 需 OSI 开源许可，与当前「商业收费」许可不兼容（见 `docs/follow-up.md`）。

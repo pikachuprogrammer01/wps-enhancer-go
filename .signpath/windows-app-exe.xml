@@ -1,0 +1,8 @@
+<artifact-configuration xmlns="http://signpath.io/artifact-configuration/v1">
+  <!-- GitHub upload-artifact wraps files in a ZIP; root must be zip-file. -->
+  <zip-file>
+    <pe-file path="wps-enhancer-go.exe">
+      <authenticode-sign/>
+    </pe-file>
+  </zip-file>
+</artifact-configuration>

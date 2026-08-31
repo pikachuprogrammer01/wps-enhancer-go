@@ -1,6 +1,6 @@
 # 版本与授权 — 后续 Agent 工作约定
 
-> 权威补充：`docs/migration/05-license.md`（后端订阅模块）、`docs/wps-activation-policy.md`（激活契约）。  
+> 权威补充：`docs/migration/05-license.md`（后端订阅模块）、`docs/wps-activation-policy.md`（激活契约）、`docs/subscription-terms.md`（Pro 订阅与 MIT 关系）。  
 > 本文约束 **Go 版前端 + 命令层**，避免把版本/授权逻辑嵌进通讯录等业务。
 
 ---

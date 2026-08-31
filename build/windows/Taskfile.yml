@@ -114,12 +114,24 @@ tasks:
 
   create:nsis:installer:
     summary: Creates an NSIS installer
-    dir: build/windows/nsis
     deps:
       - task: build
+    cmds:
+      - task: create:nsis:installer:from-bin
+        vars:
+          INSTALL_SCOPE: '{{.INSTALL_SCOPE | default "machine"}}'
+          ARCH: '{{.ARCH | default ARCH}}'
+    vars:
+      INSTALL_SCOPE: '{{.INSTALL_SCOPE | default "machine"}}'
+
+  create:nsis:installer:from-bin:
+    summary: Creates an NSIS installer from existing bin/*.exe (no rebuild; for CI sign-then-package)
+    dir: build/windows/nsis
     preconditions:
       - sh: '[ "{{.INSTALL_SCOPE}}" = "user" ] || [ "{{.INSTALL_SCOPE}}" = "machine" ]'
         msg: "INSTALL_SCOPE must be 'user' or 'machine', got '{{.INSTALL_SCOPE}}'"
+      - sh: test -f "{{.ROOT_DIR}}/{{.BIN_DIR}}/{{.APP_NAME}}.exe"
+        msg: "Missing {{.BIN_DIR}}/{{.APP_NAME}}.exe — build or place signed exe first"
     cmds:
       # Create the Microsoft WebView2 bootstrapper if it doesn't exist
       - wails3 generate webview2bootstrapper -dir "{{.ROOT_DIR}}/build/windows/nsis"

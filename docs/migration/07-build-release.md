@@ -35,7 +35,7 @@ task package                  # macOS → .app；Windows → NSIS installer（�
 - 脚本：`build/windows/nsis/project.nsi`
 - `task package`（`GOOS=windows`）默认 `FORMAT=nsis`：生成 bootstrapper + `*-installer.exe`
 - **不签名**：用户若遇 SmartScreen → 指引文案已含「更多信息 → 仍要运行」
-- 可选二期：`task windows:sign:installer`（需证书）
+- 可选：`task windows:sign:installer`（OV 证书）；或仓库公开后 **SignPath Foundation** 免费 OSS 签名（见 `docs/follow-up.md`）
 
 ### macOS
 
@@ -71,7 +71,7 @@ task package                  # macOS → .app；Windows → NSIS installer（�
 **第二期**
 
 - [ ] 配置 `GITEE_TOKEN` + 首次同步 `my-software-releases` 跑绿（见 `docs/gitee-releases.md`）
-- [ ] 签名/公证（可选）；端到端：旧版 → 检查 → 下载 → 替换 → 新版本号
+- [ ] GitHub 公开 + SignPath / OV 签名（可选）；端到端：旧版 → 检查 → 下载 → 替换 → 新版本号
 
 ---
 

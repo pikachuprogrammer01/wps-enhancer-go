@@ -1,6 +1,10 @@
 # 双端构建与发布（Wails v3）
 # 触发：tag v* 或手动 Run workflow
 # 资产命名含平台+架构，对齐 updater.findAsset（macos|windows + arm64|x86_64）
+#
+# Windows 签名顺序（SignPath）：
+#   build exe → 签 exe → 用已签名 exe 打 NSIS → 签 installer → 发布
+# Secrets 未配时跳过签名，仍产出未签名包。
 name: Release
 
 on:
@@ -16,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: release-${{ github.ref }}
@@ -130,6 +135,115 @@ jobs:
           cache: pnpm
           cache-dependency-path: frontend/pnpm-lock.yaml
 
+      - name: Install Task + Wails3
+        shell: bash
+        run: |
+          set -euo pipefail
+          go install github.com/go-task/task/v3/cmd/task@latest
+          go install github.com/wailsapp/wails/v3/cmd/wails3@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
+      - name: Build Windows exe
+        shell: bash
+        run: |
+          set -euo pipefail
+          task build
+          test -f bin/wps-enhancer-go.exe
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-unsigned-exe
+          path: bin/wps-enhancer-go.exe
+          if-no-files-found: error
+
+  sign-app-exe:
+    needs: build-windows
+    runs-on: ubuntu-latest
+    outputs:
+      signpath: ${{ steps.cfg.outputs.enabled }}
+    steps:
+      - name: Detect SignPath configuration
+        id: cfg
+        env:
+          SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
+          SIGNPATH_ORGANIZATION_ID: ${{ secrets.SIGNPATH_ORGANIZATION_ID }}
+        run: |
+          if [ -n "${SIGNPATH_API_TOKEN}" ] && [ -n "${SIGNPATH_ORGANIZATION_ID}" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "SignPath secrets detected"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "SignPath secrets not set; Windows builds stay unsigned (docs/signpath-setup.md)"
+          fi
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-unsigned-exe
+          path: unsigned
+
+      - name: Upload app exe for SignPath
+        if: steps.cfg.outputs.enabled == 'true'
+        id: upload-app
+        uses: actions/upload-artifact@v4
+        with:
+          name: signpath-app-exe-in
+          path: unsigned/wps-enhancer-go.exe
+
+      - name: Sign app exe
+        if: steps.cfg.outputs.enabled == 'true'
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ secrets.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'wps-enhancer-go' }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY || 'release-signing' }}
+          artifact-configuration-slug: windows-app-exe
+          github-artifact-id: ${{ steps.upload-app.outputs.artifact-id }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 3600
+          output-artifact-directory: signed
+
+      - name: Stage signed or unsigned app exe
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          if [ "${{ steps.cfg.outputs.enabled }}" = "true" ]; then
+            if [ -f signed/wps-enhancer-go.exe ]; then
+              cp signed/wps-enhancer-go.exe out/
+            else
+              find signed -type f -print || true
+              zipf=$(find signed -name '*.zip' -print -quit || true)
+              if [ -n "${zipf}" ]; then
+                unzip -o "${zipf}" -d signed-extract
+                cp signed-extract/wps-enhancer-go.exe out/
+              else
+                exe=$(find signed -name 'wps-enhancer-go.exe' -print -quit || true)
+                test -n "${exe}"
+                cp "${exe}" out/
+              fi
+            fi
+          else
+            cp unsigned/wps-enhancer-go.exe out/
+          fi
+          ls -la out/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-app-exe
+          path: out/wps-enhancer-go.exe
+          if-no-files-found: error
+
+  build-installer:
+    needs: sign-app-exe
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: go.sum
+
       - name: Install Task + Wails3 + NSIS
         shell: bash
         run: |
@@ -138,34 +252,110 @@ jobs:
           go install github.com/wailsapp/wails/v3/cmd/wails3@latest
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
           choco install nsis -y --no-progress
-          # windows-latest 不会自动刷新 choco 写入的 PATH；须用 Windows 路径写 GITHUB_PATH
           echo 'C:\Program Files (x86)\NSIS' >> "$GITHUB_PATH"
           echo 'C:\Program Files (x86)\NSIS\Bin' >> "$GITHUB_PATH"
 
-      - name: Package (NSIS)
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-app-exe
+          path: bin
+
+      - name: Build NSIS from (signed) exe
         shell: bash
         run: |
           set -euo pipefail
+          test -f bin/wps-enhancer-go.exe
           command -v makensis
           makensis -VERSION
-          task package
-
-      - name: Stage Windows assets
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p dist-release
-          ls -la bin/
+          # 不 rebuild：嵌入的是已签名 exe
+          task windows:create:nsis:installer:from-bin
           INST=$(ls bin/*-installer.exe 2>/dev/null | head -1 || true)
           if [ -z "${INST}" ]; then
             echo "::error::未找到 NSIS 安装器 bin/*-installer.exe"
             exit 1
           fi
-          cp "${INST}" "dist-release/WPSEnhancer-windows-x86_64-installer.exe"
-          if [ -f bin/wps-enhancer-go.exe ]; then
-            # windows-latest 无 zip；用 PowerShell Compress-Archive
-            powershell.exe -NoProfile -Command \
-              "Compress-Archive -Path 'bin/wps-enhancer-go.exe' -DestinationPath 'dist-release/WPSEnhancer-windows-x86_64.zip' -Force"
+          cp "${INST}" bin/WPSEnhancer-windows-x86_64-installer.exe
+          ls -la bin/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-unsigned-installer
+          path: bin/WPSEnhancer-windows-x86_64-installer.exe
+          if-no-files-found: error
+
+  sign-installer:
+    needs: [sign-app-exe, build-installer]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Detect SignPath configuration
+        id: cfg
+        env:
+          SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
+          SIGNPATH_ORGANIZATION_ID: ${{ secrets.SIGNPATH_ORGANIZATION_ID }}
+        run: |
+          if [ -n "${SIGNPATH_API_TOKEN}" ] && [ -n "${SIGNPATH_ORGANIZATION_ID}" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-app-exe
+          path: app
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-unsigned-installer
+          path: installer
+
+      - name: Upload installer for SignPath
+        if: steps.cfg.outputs.enabled == 'true'
+        id: upload-inst
+        uses: actions/upload-artifact@v4
+        with:
+          name: signpath-installer-in
+          path: installer/WPSEnhancer-windows-x86_64-installer.exe
+
+      - name: Sign installer
+        if: steps.cfg.outputs.enabled == 'true'
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ secrets.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'wps-enhancer-go' }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY || 'release-signing' }}
+          artifact-configuration-slug: windows-installer-exe
+          github-artifact-id: ${{ steps.upload-inst.outputs.artifact-id }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 3600
+          output-artifact-directory: signed
+
+      - name: Package go-windows release assets
+        run: |
+          set -euo pipefail
+          mkdir -p dist-release
+          cp app/wps-enhancer-go.exe dist-release/
+          (cd dist-release && zip -j WPSEnhancer-windows-x86_64.zip wps-enhancer-go.exe)
+          rm -f dist-release/wps-enhancer-go.exe
+
+          if [ "${{ steps.cfg.outputs.enabled }}" = "true" ]; then
+            if [ -f signed/WPSEnhancer-windows-x86_64-installer.exe ]; then
+              cp signed/WPSEnhancer-windows-x86_64-installer.exe dist-release/
+            else
+              find signed -type f -print || true
+              zipf=$(find signed -name '*.zip' -print -quit || true)
+              if [ -n "${zipf}" ]; then
+                unzip -o "${zipf}" -d signed-extract
+                cp signed-extract/WPSEnhancer-windows-x86_64-installer.exe dist-release/
+              else
+                inst=$(find signed -name 'WPSEnhancer-windows-x86_64-installer.exe' -print -quit || true)
+                test -n "${inst}"
+                cp "${inst}" dist-release/
+              fi
+            fi
+          else
+            cp installer/WPSEnhancer-windows-x86_64-installer.exe dist-release/
           fi
           ls -la dist-release/
 
@@ -176,13 +366,14 @@ jobs:
           if-no-files-found: error
 
   release:
-    needs: [verify-version, build-macos, build-windows]
+    needs: [verify-version, build-macos, sign-installer]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v4
         with:
+          pattern: go-*
           path: artifacts
           merge-multiple: true
 

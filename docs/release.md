@@ -170,3 +170,21 @@ A: 用 `release.sh` 只传一个版本即可，脚本改两处并保证一致。
 
 **Q: 发布仓还要维护什么？**  
 A: 平时不用动。`main` README 产品索引偶发更新即可；分支与清单由本仓脚本维护。
+
+**Q: Windows 在 Gitee 网页下载 zip / installer 都被拦截？**  
+A: 当前包**未做 Windows 代码签名**，Edge / Defender SmartScreen 对 Gitee 上的未知发布者常会同时拦 `.zip` 与 `.exe`（zip 内也有 exe）。可依次尝试：
+
+1. **已有旧版**：应用内 **设置 → 更新 → 下载更新包**（不走浏览器，通常可下）。
+2. **PowerShell 直链下载**（管理员打开 PowerShell）：
+
+   ```powershell
+   $url = "https://gitee.com/pikachuprogrammer01/my-software-releases/releases/download/wps-enhancer-v1.1.0/WPSEnhancer-windows-x86_64.zip"
+   $out = "$env:USERPROFILE\Downloads\WPSEnhancer-windows-x86_64.zip"
+   Invoke-WebRequest -Uri $url -OutFile $out -UseBasicParsing
+   Unblock-File -Path $out
+   ```
+
+   若仍被删，打开 **Windows 安全中心 → 病毒和威胁防护 → 保护历史记录**，看是否「已阻止」；可临时关「实时保护」再下，下完立刻打开并 `Unblock-File`。
+3. **浏览器**：下载栏里被拦项 → `⋯` → **保留**；运行 exe 时 SmartScreen → **更多信息 → 仍要运行**。
+4. **换网络 / 换设备**：手机流量热点、Mac 下载后 U 盘拷贝，有时比公司网 + 360 等杀软组合更顺。
+5. **长期**：配置 GitHub Secrets `SIGNPATH_*` 后 CI 自动 Authenticode 签名（见 [`docs/signpath-setup.md`](./signpath-setup.md)）；或自购 OV 证书。

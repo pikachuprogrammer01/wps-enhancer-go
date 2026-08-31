@@ -15,6 +15,8 @@
 | 前端业务页（`ImportView` 等） | 需要门禁时读 `useAppMeta().isPro` | 直接 `App.Version` / `App.License*`、内嵌激活表单 |
 | 前端元信息 | `composables/useAppMeta.ts`、`components/VersionLicensePanel.vue`、`views/LicenseView.vue` | 把激活 UI 抄进业务页 |
 
+**临时隐藏订阅 UI**：`frontend/src/featureFlags.ts` 中 `SHOW_SUBSCRIPTION_UI = false` 时，首页/版本区/激活页不展示；后端 `internal/license` 与 API **保留不删**。恢复展示改回 `true` 即可。
+
 **能力门禁唯一入口**
 
 - 后端：`license.State.IsPro()`（经 App 注入的 `licenseState`）

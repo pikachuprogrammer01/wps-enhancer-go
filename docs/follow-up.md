@@ -31,7 +31,7 @@
 ### 产品
 
 1. xlsx `PreviewDisplay` WYSIWYG  
-2. LicenseHub 联调  
+2. LicenseHub 联调（UI 已用 `SHOW_SUBSCRIPTION_UI=false` 隐藏，代码未删）  
 
 ## 发版
 

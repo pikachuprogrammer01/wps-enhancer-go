@@ -2,6 +2,7 @@
 // 首页：仅产品切换与业务入口；版本/授权由独立组件承载，本页不直接调 License/Version API。
 import { ref } from "vue";
 import VersionLicensePanel from "../components/VersionLicensePanel.vue";
+import { SHOW_SUBSCRIPTION_UI } from "../featureFlags";
 
 const office = ref<"excel" | "word">("excel");
 
@@ -27,7 +28,7 @@ const tools = [
         <p>围绕 WPS Word 与 Excel，提供更直接的本地操作。</p>
       </div>
       <div class="header-actions">
-        <button class="small-btn" @click="emit('license')">激活与授权</button>
+        <button v-if="SHOW_SUBSCRIPTION_UI" class="small-btn" @click="emit('license')">激活与授权</button>
         <button class="small-btn" :title="isMac ? '快捷键 ⌘,' : '快捷键 Ctrl,'" @click="emit('settings')">设置 ⌘,</button>
       </div>
     </section>

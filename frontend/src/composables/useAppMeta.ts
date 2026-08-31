@@ -2,6 +2,7 @@
 // 业务页不应直接调用 App.Version / App.License*；需要时用本 composable 或 VersionLicensePanel。
 import { computed, ref } from "vue";
 import { App } from "../../bindings/wps-enhancer-go/internal/app/index.js";
+import { SHOW_SUBSCRIPTION_UI } from "../featureFlags";
 
 const version = ref("");
 const isPro = ref(false);
@@ -26,13 +27,15 @@ async function refresh(): Promise<void> {
       } catch {
         /* 版本读取失败静默 */
       }
-      try {
-        const st = await App.LicenseStatus();
-        isPro.value = !!st?.is_pro;
-        licenseType.value = st?.type ?? "";
-        expiresAt.value = st?.expires_at;
-      } catch {
-        /* 授权读取失败静默 */
+      if (SHOW_SUBSCRIPTION_UI) {
+        try {
+          const st = await App.LicenseStatus();
+          isPro.value = !!st?.is_pro;
+          licenseType.value = st?.type ?? "";
+          expiresAt.value = st?.expires_at;
+        } catch {
+          /* 授权读取失败静默 */
+        }
       }
       loaded.value = true;
     } finally {

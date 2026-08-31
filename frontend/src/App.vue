@@ -18,6 +18,7 @@ import HomeView from "./views/HomeView.vue";
 import ImportView from "./views/ImportView.vue";
 import LicenseView from "./views/LicenseView.vue";
 import SettingsView from "./views/SettingsView.vue";
+import { SHOW_SUBSCRIPTION_UI } from "./featureFlags";
 
 const history = new NavHistory("home", suggestNavHistoryLimit());
 const view = ref<AppView>("home");
@@ -27,6 +28,11 @@ const importSession = ref(0);
 const importNavStep = ref(1);
 
 function applyEntry(e: NavEntry) {
+  // 订阅 UI 隐藏时不允许停在激活页（历史回退等）
+  if (!SHOW_SUBSCRIPTION_UI && e.view === "license") {
+    view.value = "home";
+    return;
+  }
   view.value = e.view;
   if (e.view === "import") {
     importNavStep.value = e.step ?? 1;
@@ -34,6 +40,7 @@ function applyEntry(e: NavEntry) {
 }
 
 function navigate(to: AppView, step?: number) {
+  if (!SHOW_SUBSCRIPTION_UI && to === "license") return;
   const entry: NavEntry =
     to === "import"
       ? { view: to, step: step ?? (importNavStep.value || 1) }
@@ -144,7 +151,7 @@ onUnmounted(() => {
               @back="goBack"
               @home="goHome"
             />
-            <LicenseView v-if="view === 'license'" @back="goBack" @home="goHome" />
+            <LicenseView v-if="SHOW_SUBSCRIPTION_UI && view === 'license'" @back="goBack" @home="goHome" />
             <SettingsView v-if="view === 'settings'" @back="goBack" @home="goHome" />
           </main>
         </div>

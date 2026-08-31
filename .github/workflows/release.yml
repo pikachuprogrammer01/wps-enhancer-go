@@ -400,7 +400,9 @@ jobs:
             exit 0
           fi
           chmod +x scripts/publish-gitee.sh
+          # CI 常重打同一版本 tag：Gitee 侧需 --force 覆盖已有 Release
           bash scripts/publish-gitee.sh \
             --version "${{ needs.verify-version.outputs.version }}" \
             --assets-dir artifacts \
+            --force \
             --notes "WPS Enhancer v${{ needs.verify-version.outputs.version }}"

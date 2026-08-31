@@ -160,7 +160,7 @@ https://gitee.com/pikachuprogrammer01/my-software-releases/raw/wps-enhancer/upda
 A: 必须打 `v*` tag（或跑 `release.sh`）。只推代码不会触发 Release。
 
 **Q: Actions 绿了但 Gitee 没更新？**  
-A: 检查 Secret `GITEE_TOKEN` 是否为 PAT、权限是否够；看 Release job 里「Publish to Gitee」日志。
+A: 检查 Secret `GITEE_TOKEN` 是否为 PAT、权限是否够；看 Release job 里「Publish to Gitee」日志。CI 已默认带 `--force`，同版本重发会覆盖 Gitee Release。
 
 **Q: 客户端检查更新 404 / 格式错误？**  
 A: 确认 raw URL 能打开且含 `urls`；不要用手写成单字段 `url`。

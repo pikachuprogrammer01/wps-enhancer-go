@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
-Name=My Product
-Comment=A wps-enhancer-go application
+Name=WPS 增强工具
+Comment=WPS 表格增强工具：Excel 批量导入通讯录
 # The Exec line includes %u to pass the URL to the application
 Exec=/usr/local/bin/wps-enhancer-go %u
 Terminal=false

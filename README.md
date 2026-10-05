@@ -1,3 +1,5 @@
+<p align="center"><img src="frontend/public/logo.png" alt="WPS Enhancer" width="96" /></p>
+
 # WPS Enhancer — Go 版
 
 WPS 表格增强工具的 Go + Wails v3 重构版。当前功能：**Excel 批量导入通讯录**——把杂乱的客户表格一键整理成手机可导入的通讯录格式。
@@ -49,6 +51,11 @@ internal/app      命令层：流程编排、错误码翻译（唯一允许捕�
 internal/license  订阅授权      internal/updater  自动更新
 internal/logger   日志          internal/errs     统一错误定义
 third_party/      vendored fork（wails / xls，本地补丁见各自目录说明）
+
+图标资源链（唯一主素材 → 派生产物，换图后 `task logo` 重生成）：
+build/appicon.png（1024 满幅；macOS 26 会给留白图标套灰色底板，所以素材必须铺满画布）
+    ├─→ build/darwin/icons.icns + build/windows/icon.ico
+    └─→ frontend/public/logo.png（应用内 UI 与 favicon）
 ```
 
 约定：`internal/core` 全部为纯函数（相同输入必得相同输出）；文件 IO 层不含业务逻辑；模块间传递使用定义好的结构体；失败通过 sentinel error 逐层上抛，只在命令层翻译为前端错误码。

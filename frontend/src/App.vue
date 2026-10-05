@@ -129,7 +129,7 @@ onUnmounted(() => {
           <div class="app-window">
           <header class="titlebar">
             <div class="brand">
-              <div class="logo">W</div>
+              <img class="logo" src="/logo.png" alt="" />
               <span class="brand-name">WPS Enhancer</span>
               <span class="brand-type">Office 增强工具</span>
             </div>

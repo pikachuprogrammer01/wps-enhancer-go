@@ -2,9 +2,9 @@
 import type { GlobalThemeOverrides } from "naive-ui";
 
 export const tokens = {
-  brand: "#E5484D",
-  brandHover: "#D63B42",
-  brandSoft: "#FFF1F2",
+  brand: "#1565D8",
+  brandHover: "#0F52BC",
+  brandSoft: "#EBF3FE",
   word: "#2563EB",
   wordSoft: "#EFF6FF",
   excel: "#16A34A",

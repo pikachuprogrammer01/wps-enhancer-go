@@ -756,7 +756,7 @@ onMounted(async () => {
         <!-- 关于 -->
         <n-tab-pane name="about" tab="关于">
           <div class="about-box">
-            <div class="about-logo">W</div>
+            <img class="about-logo" src="/logo.png" alt="" />
             <div class="about-name">WPS Enhancer</div>
             <div class="about-version">版本 v{{ aboutVersion }}</div>
             <p class="helper about-desc">

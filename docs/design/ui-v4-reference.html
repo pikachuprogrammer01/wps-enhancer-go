@@ -6,9 +6,9 @@
 <title>WPS Enhancer UI Preview · Excel / Word</title>
 <style>
 :root{
-  --brand:#E5484D;
-  --brand-hover:#D63B42;
-  --brand-soft:#FFF1F2;
+  --brand:#1565D8;
+  --brand-hover:#0F52BC;
+  --brand-soft:#EBF3FE;
   --word:#2563EB;
   --word-soft:#EFF6FF;
   --excel:#16A34A;
@@ -45,10 +45,7 @@ button{font:inherit;cursor:pointer}
   display:flex;align-items:center;padding:0 17px;background:#fff;
 }
 .brand{display:flex;align-items:center;gap:9px}
-.logo{
-  width:25px;height:25px;border-radius:7px;background:var(--brand);
-  color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;
-}
+.logo{width:26px;height:26px;object-fit:contain}
 .brand-name{font-size:13px;font-weight:650}
 .brand-type{font-size:11px;color:var(--text-muted);margin-left:2px}
 .window-tools{margin-left:auto;display:flex;gap:3px}
@@ -216,7 +213,7 @@ button{font:inherit;cursor:pointer}
 <div class="window">
 <header class="titlebar">
   <div class="brand">
-    <div class="logo">W</div>
+    <img class="logo" src="../../frontend/public/logo.png" alt="">
     <span class="brand-name">WPS Enhancer</span>
     <span class="brand-type">Office 增强工具</span>
   </div>
@@ -298,7 +295,7 @@ button{font:inherit;cursor:pointer}
     <h2>UI Design Tokens</h2>
     <p>以下颜色和字号是后续页面必须复用的基础规范，不应在单个页面自行重新定义。</p>
     <div class="tokens">
-      <div class="token"><div class="swatch" style="background:#E5484D"></div><div class="token-info"><div class="token-name">Brand</div><div class="token-code">#E5484D</div></div></div>
+      <div class="token"><div class="swatch" style="background:#1565D8"></div><div class="token-info"><div class="token-name">Brand</div><div class="token-code">#1565D8</div></div></div>
       <div class="token"><div class="swatch" style="background:#2563EB"></div><div class="token-info"><div class="token-name">Word</div><div class="token-code">#2563EB</div></div></div>
       <div class="token"><div class="swatch" style="background:#16A34A"></div><div class="token-info"><div class="token-name">Excel</div><div class="token-code">#16A34A</div></div></div>
       <div class="token"><div class="swatch" style="background:#18181B"></div><div class="token-info"><div class="token-name">Text</div><div class="token-code">#18181B</div></div></div>

@@ -1,8 +1,9 @@
 /* ===== WPS Enhancer 设计系统 v1.0（依据 WPS-Enhancer-UI-Design-System + v4 HTML 参考） ===== */
 :root {
-  --brand: #E5484D;
-  --brand-hover: #D63B42;
-  --brand-soft: #FFF1F2;
+  /* 品牌色取自 logo：深蓝 #003CB4 与亮蓝 #249CE4 的中间调 */
+  --brand: #1565D8;
+  --brand-hover: #0F52BC;
+  --brand-soft: #EBF3FE;
   --word: #2563EB;
   --word-soft: #EFF6FF;
   --excel: #16A34A;
@@ -61,10 +62,7 @@ body {
   display: flex; align-items: center; gap: 9px;
 }
 .logo {
-  width: 25px; height: 25px; border-radius: 7px;
-  background: var(--brand); color: #fff;
-  display: grid; place-items: center;
-  font-size: 13px; font-weight: 800;
+  width: 26px; height: 26px; object-fit: contain;
 }
 .brand-name { font-size: 13px; font-weight: 650; }
 .brand-type { font-size: 11px; color: var(--text-muted); margin-left: 2px; }
@@ -158,7 +156,7 @@ body {
   border: 0; border-radius: 7px;
   background: var(--brand); color: #fff;
   font-size: 12px; font-weight: 600; cursor: pointer;
-  box-shadow: 0 4px 10px rgba(229, 72, 77, .18);
+  box-shadow: 0 4px 10px rgba(21, 101, 216, .18);
   /* 位于内容流底部（margin-top:auto 沉底），内容增高时自动下移，不遮挡上方文字 */
 }
 .start:hover { background: var(--brand-hover); }
@@ -347,7 +345,7 @@ body {
 .field-block .field-row { margin-bottom: 0; }
 
 .template-table { margin-top: 10px; cursor: pointer; }
-.template-table .row-selected td { background: #FFF1F2 !important; }
+.template-table .row-selected td { background: var(--brand-soft) !important; }
 .template-table .cell-actions { display: flex; gap: 6px; }
 .template-table .cell-name { font-weight: 500; }
 .template-empty { padding: 18px 0; }
@@ -383,10 +381,8 @@ body {
 .error-text { color: var(--danger); }
 .about-box { text-align: center; padding: 28px 0 12px; }
 .about-logo {
-  width: 52px; height: 52px; border-radius: 12px;
-  background: var(--brand); color: #fff;
-  display: grid; place-items: center;
-  font-size: 26px; font-weight: 800; margin: 0 auto 12px;
+  width: 60px; height: 60px; object-fit: contain;
+  margin: 0 auto 12px; display: block;
 }
 .about-name { font-size: 16px; font-weight: 650; }
 .about-version { font-size: 11px; color: var(--text-muted); margin: 4px 0 14px; }
@@ -472,7 +468,7 @@ body {
   background: var(--brand-soft);
 }
 .source-preview td.col-hit {
-  background: #FFF8F8;
+  background: #F5F9FE;
 }
 
 @media (max-width: 950px) {

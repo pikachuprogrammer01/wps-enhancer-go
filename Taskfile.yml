@@ -71,6 +71,12 @@ tasks:
     cmds:
       - task: common:setup:docker
 
+  logo:
+    summary: 换 logo 用——主素材是满幅 1024 的 build/appicon.png，改完跑它重生成 icns/ico 与前端 logo（需 wails3 CLI，仅 macOS）
+    cmds:
+      - sips -z 256 256 -s format png build/appicon.png --out frontend/public/logo.png
+      - task: common:generate:icons
+
   build:server:
     summary: Builds the application in server mode (no GUI, HTTP server only)
     cmds:
